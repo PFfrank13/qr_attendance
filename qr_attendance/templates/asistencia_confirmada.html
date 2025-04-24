@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de Asistencia | Sistema de Gestión de Eventos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --primary-gradient: linear-gradient(135deg, #2563eb, #4338ca);
+            --success-color: #10b981;
+            --success-dark: #059669;
+            --success-light: #d1fae5;
+            --success-gradient: linear-gradient(135deg, #10b981, #047857);
+            --info-color: #0ea5e9;
+            --info-dark: #0284c7;
+            --info-light: #e0f2fe;
+            --info-gradient: linear-gradient(135deg, #0ea5e9, #0369a1);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --surface: #ffffff;
+            --surface-hover: #f8fafc;
+            --background: #f1f5f9;
+            --background-gradient: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-highlight: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            --radius: 12px;
+            --radius-full: 9999px;
+            --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-light: #1e3a8a;
+            --primary-gradient: linear-gradient(135deg, #3b82f6, #2563eb);
+            --success-color: #10b981;
+            --success-dark: #059669;
+            --success-light: #064e3b;
+            --success-gradient: linear-gradient(135deg, #10b981, #059669);
+            --info-color: #0ea5e9;
+            --info-dark: #0284c7;
+            --info-light: #0c4a6e;
+            --info-gradient: linear-gradient(135deg, #0ea5e9, #0284c7);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --surface: #1e293b;
+            --surface-hover: #334155;
+            --background: #0f172a;
+            --background-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            background-color: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+            animation: card-entrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-header {
+            position: relative;
+            padding: 2.5rem 2rem;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            z-index: -1;
+        }
+
+        .card-header.info::before {
+            background: var(--info-gradient);
+        }
+
+        .card-header.success::before {
+            background: var(--success-gradient);
+        }
+
+        .header-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.15);
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .header-icon::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .card-header.info .header-icon::after {
+            border-color: rgba(14, 165, 233, 0.5);
+        }
+
+        .card-header.success .header-icon::after {
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 20px 20px;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        .card-body {
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .card-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: white;
+        }
+
+        .message-box {
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 0 0 1.5rem;
+            background-color: var(--success-light);
+            border-left: 4px solid var(--success-color);
+            animation: fade-in 0.5s ease-out forwards;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .message-box.info {
+            background-color: var(--info-light);
+            border-left: 4px solid var(--info-color);
+        }
+
+        .message-box::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.05), transparent);
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+        }
+
+        .message-box:hover::after {
+            transform: translateX(0);
+        }
+
+        .message-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .message-title i {
+            margin-right: 0.5rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            text-align: left;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--surface-hover);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .info-grid:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+        
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-value {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .attendance-time {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timestamp {
+            display: inline-block;
+            background-color: var(--surface-hover);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-family: 'Courier New', monospace;
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .timestamp:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 1s ease;
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+
+        .bottom-wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 1;
+        }
+
+        .bottom-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 150px;
+        }
+
+        .bottom-wave .shape-fill {
+            fill: rgba(37, 99, 235, 0.05);
+            transition: var(--transition);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            opacity: 0;
+            z-index: 0;
+            transform: translateZ(0);
+            animation: confetti-fall 5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+        }
+
+        .qr-code {
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .qr-code img {
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .qr-code:hover img {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .qr-code::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .badge-success {
+            background-color: var(--success-light);
+            color: var(--success-dark);
+        }
+
+        .badge-info {
+            background-color: var(--info-light);
+            color: var(--info-dark);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            box-shadow: var(--shadow);
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px) rotate(15deg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+
+        .tooltip:hover::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--text-primary);
+            color: var(--surface);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+            opacity: 0;
+            animation: fade-in 0.2s ease-out forwards;
+        }
+
+        .tooltip:hover::after {
+            content: "";
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid var(--text-primary);
+            opacity: 0;
+            animation: fade-in 0.2s ease-out forwards;
+        }
+
+        .share-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+
+        .share-button:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .share-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            flex-direction: column;
+            min-width: 180px;
+            z-index: 100;
+            border: 1px solid var(--border);
+        }
+
+        .share-menu.active {
+            display: flex;
+            animation: slide-in 0.3s ease forwards;
+        }
+
+        .share-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .share-option:hover {
+            background: var(--surface-hover);
+        }
+
+        .progress-bar {
+            height: 6px;
+            width: 100%;
+            background-color: var(--border);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-value {
+            height: 100%;
+            border-radius: var(--radius-full);
+            background: var(--primary-gradient);
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+
+        .checkmark-container {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--success-gradient);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            box-shadow: var(--shadow);
+            border: 2px solid white;
+        }
+
+        @keyframes card-entrance {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes slide-in {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .particle {
+            position: fixed;
+            background: var(--primary-color);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                max-width: 100%;
+                margin: 1rem;
+            }
+            
+            .card-header, .card-body {
+                padding: 1.75rem 1.25rem;
+            }
+            
+            .header-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .actions {
+                gap: 0.75rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .bottom-wave, .theme-toggle, .confetti, .share-button, .btn-secondary {
+                display: none !important;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Add focus styles for keyboard navigation */
+        a:focus, button:focus, .share-button:focus, .theme-toggle:focus {
+            outline: none;
+            box-shadow: var(--shadow-highlight);
+        }
+
+        /* Reduce motion option */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle" role="button" aria-label="Cambiar tema claro/oscuro" tabindex="0">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <div class="container">
+        {% if ya_registrado %}
+        <div class="card-header info">
+            <div class="header-pattern"></div>
+            <div class="header-icon">
+                <i class="fas fa-info"></i>
+            </div>
+            <h1>Asistencia Verificada</h1>
+            <p class="card-subtitle">Ya habías confirmado tu asistencia</p>
+            
+            <div class="share-button" aria-label="Compartir" tabindex="0">
+                <i class="fas fa-share-alt"></i>
+                <div class="share-menu">
+                    <a href="#" class="share-option" id="copy-link">
+                        <i class="fas fa-link"></i>
+                        <span>Copiar enlace</span>
+                    </a>
+                    <a href="#" class="share-option" id="share-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="#" class="share-option" id="share-email">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="message-box info">
+                <div class="message-title">
+                    <i class="fas fa-circle-check"></i>
+                    Asistencia ya registrada
+                </div>
+                <p>¡Hola <span class="user-name">{{ nombre }}</span>! Tu asistencia ya fue registrada anteriormente.</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-label">
+                    <i class="fas fa-check-circle"></i>
+                    Estado:
+                </div>
+                <div class="info-value">
+                    Asistencia confirmada
+                    <span class="badge badge-info">Verificado</span>
+                </div>
+                
+                <div class="info-label">
+                    <i class="fas fa-user"></i>
+                    Participante:
+                </div>
+                <div class="info-value">{{ nombre }}</div>
+                
+                <div class="info-label">
+                    <i class="fas fa-calendar-alt"></i>
+                    Fecha de registro:
+                </div>
+                <div class="info-value">{{ fecha_registro }}</div>
+            </div>
+            
+            <div class="qr-code tooltip" data-tooltip="Muestra este QR para verificación">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ url_for('verificar_asistencia', id_participante=id_participante, _external=True) }}" alt="Código QR de verificación" width="150" height="150">
+            </div>
+            
+            <div class="attendance-time">
+                <i class="fas fa-clock"></i>
+                Registrado el <span class="timestamp">{{ fecha_registro }}</span>
+            </div>
+            
+            <div class="actions">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">
+                    <i class="fas fa-home"></i>
+                    Volver al inicio
+                </a>
+                <button class="btn btn-secondary" id="btn-download-certificate">
+                    <i class="fas fa-download"></i>
+                    Descargar certificado
+                </button>
+            </div>
+        </div>
+        {% else %}
+        <div class="card-header success">
+            <div class="header-pattern"></div>
+            <div class="header-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>¡Asistencia Confirmada!</h1>
+            <p class="card-subtitle">Gracias por asistir al evento</p>
+            
+            <div class="share-button" aria-label="Compartir" tabindex="0">
+                <i class="fas fa-share-alt"></i>
+                <div class="share-menu">
+                    <a href="#" class="share-option" id="copy-link">
+                        <i class="fas fa-link"></i>
+                        <span>Copiar enlace</span>
+                    </a>
+                    <a href="#" class="share-option" id="share-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="#" class="share-option" id="share-email">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="progress-bar">
+                <div class="progress-value" id="progress-value"></div>
+            </div>
+            
+            <div class="message-box">
+                <div class="message-title">
+                    <i class="fas fa-circle-check"></i>
+                    Registro exitoso
+                </div>
+                <p>¡Hola <span class="user-name">{{ nombre }}</span>! Tu asistencia ha sido registrada exitosamente en nuestro sistema.</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-label">
+                    <i class="fas fa-check-circle"></i>
+                    Estado:
+                </div>
+                <div class="info-value">
+                    Asistencia confirmada
+                    <span class="badge badge-success">Nuevo</span>
+                </div>
+                
+                <div class="info-label">
+                    <i class="fas fa-user"></i>
+                    Participante:
+                </div>
+                <div class="info-value">{{ nombre }}</div>
+                
+                <div class="info-label">
+                    <i class="fas fa-calendar-alt"></i>
+                    Fecha:
+                </div>
+                <div class="info-value">{{ now().strftime('%d/%m/%Y') }}</div>
+                
+                <div class="info-label">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Evento:
+                </div>
+                <div class="info-value tooltip" data-tooltip="Nombre completo del evento">{{ evento_nombre }}</div>
+            </div>
+            
+            <div class="qr-code">
+                <div class="checkmark-container">
+                    <i class="fas fa-check"></i>
+                </div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ url_for('verificar_asistencia', id_participante=id_participante, _external=True) }}" alt="Código QR de verificación" width="150" height="150">
+            </div>
+            
+            <div class="attendance-time">
+                <i class="fas fa-clock"></i>
+                Registrado <span class="timestamp">ahora mismo</span>
+            </div>
+            
+            <div class="actions">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">
+                    <i class="fas fa-home"></i>
+                    Volver al inicio
+                </a>
+                <button class="btn btn-secondary" id="btn-download-certificate">
+                    <i class="fas fa-download"></i>
+                    Descargar certificado
+                </button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="bottom-wave">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+        </svg>
+    </div>
+    
+    <!-- Add custom JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Progress bar animation
+            const progressValue = document.getElementById('progress-value');
+            if (progressValue) {
+                setTimeout(() => {
+                    progressValue.style.width = '100%';
+                }, 300);
+            }
+            
+            // Dark/Light theme toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            const moonIcon = '<i class="fas fa-moon"></i>';
+            const sunIcon = '<i class="fas fa-sun"></i>';
+            
+            // Check for saved theme preference or use device preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = sunIcon;
+            } else {
+                document.body.removeAttribute('data-theme');
+                themeToggle.innerHTML = moonIcon;
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                if (document.body.getAttribute('data-theme') === 'dark') {
+                    document.body.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.innerHTML = moonIcon;
+                } else {
+                    document.body.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.innerHTML = sunIcon;
+                }
+            });
+            
+            // Share button functionality
+            const shareButton = document.querySelector('.share-button');
+            const shareMenu = document.querySelector('.share-menu');
+            
+            if (shareButton && shareMenu) {
+                shareButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    shareMenu.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!shareButton.contains(e.target)) {
+                        shareMenu.classList.remove('active');
+                    }
+                });
+                
+                // Share options
+                const copyLink = document.getElementById('copy-link');
+                if (copyLink) {
+                    copyLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        navigator.clipboard.writeText(window.location.href).then(() => {
+                            showToast('Enlace copiado al portapapeles');
+                        });
+                    });
+                }
+                
+                const shareWhatsapp = document.getElementById('share-whatsapp');
+                if (shareWhatsapp) {
+                    shareWhatsapp.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        window.open(`https://wa.me/?text=${encodeURIComponent('He confirmado mi asistencia al evento. ' + window.location.href)}`, '_blank');
+                    });
+                }
+                
+                const shareEmail = document.getElementById('share-email');
+                if (shareEmail) {
+                    shareEmail.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        window.location.href = `mailto:?subject=Confirmación de Asistencia&body=${encodeURIComponent('He confirmado mi asistencia al evento. ' + window.location.href)}`;
+                    });
+                }
+            }
+            
+            // Download Certificate button
+            const downloadBtn = document.getElementById('btn-download-certificate');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function() {
+                    showToast('Generando certificado...');
+                    setTimeout(() => {
+                        // Here you would typically make an AJAX call to generate the certificate
+                        // For demo purposes, we're just showing a success message
+                        showToast('Certificado descargado correctamente');
+                    }, 1500);
+                });
+            }
+            
+            // Create toast notification function
+            function showToast(message) {
+                const toast = document.createElement('div');
+                toast.classList.add('toast');
+                toast.innerText = message;
+                toast.style.position = 'fixed';
+                toast.style.bottom = '20px';
+                toast.style.left = '50%';
+                toast.style.transform = 'translateX(-50%)';
+                toast.style.backgroundColor = 'var(--text-primary)';
+                toast.style.color = 'var(--surface)';
+                toast.style.padding = '10px 20px';
+                toast.style.borderRadius = 'var(--radius)';
+                toast.style.boxShadow = 'var(--shadow-lg)';
+                toast.style.zIndex = '1000';
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                
+                document.body.appendChild(toast);
+                
+                // Trigger reflow to enable transition
+                toast.offsetHeight;
+                
+                toast.style.opacity = '1';
+                
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(toast);
+                    }, 300);
+                }, 2500);
+            }
+            
+            // Create background particles
+            function createParticles() {
+                const colors = [
+                    'rgba(37, 99, 235, 0.2)',
+                    'rgba(14, 165, 233, 0.2)',
+                    'rgba(16, 185, 129, 0.2)'
+                ];
+                
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    const size = Math.random() * 50 + 10;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    particle.style.left = `${Math.random() * 100}vw`;
+                    particle.style.top = `${Math.random() * 100}vh`;
+                    
+                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.opacity = '0';
+                    
+                    document.body.appendChild(particle);
+                    
+                    // Staggered animation
+                    setTimeout(() => {
+                        particle.style.opacity = '0.6';
+                        particle.style.transform = `translate(${(Math.random() - 0.5) * 50}px, ${(Math.random() - 0.5) * 50}px)`;
+                        particle.style.transition = `opacity 0.5s ease, transform ${Math.random() * 10 + 10}s linear`;
+                    }, Math.random() * 1000);
+                    
+                    // Reset after animation
+                    setInterval(() => {
+                        particle.style.opacity = '0';
+                        setTimeout(() => {
+                            particle.style.left = `${Math.random() * 100}vw`;
+                            particle.style.top = `${Math.random() * 100}vh`;
+                            setTimeout(() => {
+                                particle.style.opacity = '0.6';
+                                particle.style.transform = `translate(${(Math.random() - 0.5) * 50}px, ${(Math.random() - 0.5) * 50}px)`;
+                            }, 500);
+                        }, 500);
+                    }, Math.random() * 10000 + 15000);
+                }
+            }
+            
+            createParticles();
+            
+            // Confetti animation for new registrations
+            {% if not ya_registrado %}
+            const confettiColors = [
+                '#FF595E', '#FFCA3A', '#8AC926', '#1982C4', '#6A4C93',
+                '#FF99C8', '#FCF6BD', '#D0F4DE', '#A9DEF9', '#E4C1F9'
+            ];
+            
+            for (let i = 0; i < 60; i++) {
+                createConfetti();
+            }
+            
+            function createConfetti() {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                
+                // Formas aleatorias (círculo, cuadrado o rectángulo)
+                const shapeType = Math.floor(Math.random() * 3);
+                
+                if (shapeType === 0) {
+                    confetti.style.borderRadius = '50%';
+                } else if (shapeType === 1) {
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                } else {
+                    confetti.style.width = Math.random() * 15 + 5 + 'px';
+                    confetti.style.height = Math.random() * 7 + 3 + 'px';
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                }
+                
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation completes
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+            {% endif %}
+            
+            // Add keyboard navigation support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    shareMenu.classList.remove('active');
+                }
+            });
+            
+            // Accessibility: Make the share button behave like a button when using keyboard
+            if (shareButton) {
+                shareButton.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        shareMenu.classList.toggle('active');
+                    }
+                });
+            }
+            
+            // Add touch effects - highlight when touching elements
+            document.querySelectorAll('.btn, .share-button, .theme-toggle').forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.8';
+                });
+                
+                element.addEventListener('touchend', function() {
+                    this.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

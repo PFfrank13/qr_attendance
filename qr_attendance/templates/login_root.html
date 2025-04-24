@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | Sistema de Asistencia</title>
+    
+    <!-- Precargar fuentes para mejorar rendimiento -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === VARIABLES Y CONFIGURACIÓN === */
+        :root {
+            /* Colores principales */
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --primary-light: #4cc9f0;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            
+            /* Neutros */
+            --dark: #1d3557;
+            --light: #f8f9fa;
+            --gray-100: #f1f3f5;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            
+            /* Estados */
+            --success: #38b000;
+            --warning: #ff9e00;
+            --danger: #d90429;
+            --info: #3a86ff;
+            
+            /* Sombras */
+            --shadow-sm: 0 2px 5px rgba(0,0,0,.05);
+            --shadow-md: 0 4px 10px rgba(0,0,0,.1);
+            --shadow-lg: 0 10px 20px rgba(0,0,0,.1);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,.1);
+            
+            /* Bordes */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            
+            /* Transiciones */
+            --transition-fast: all 0.2s ease;
+            --transition: all 0.3s ease;
+            --transition-slow: all 0.5s ease;
+        }
+
+        /* === RESET Y ESTILOS BASE === */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--gray-800);
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem 1rem;
+        }
+
+        /* === CONTENEDOR PRINCIPAL === */
+        .auth-container {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 600px;
+            display: flex;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* === PANEL LATERAL === */
+        .side-panel {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .side-panel::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .side-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo-container {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-full);
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .logo-container i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .headline h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .headline p {
+            opacity: 0.85;
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .feature-list {
+            margin-top: 2.5rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        .feature:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .feature:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .feature:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .feature-icon {
+            min-width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background-color: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .feature-icon i {
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .side-footer {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* === FORMULARIO === */
+        .form-panel {
+            width: 45%;
+            background-color: white;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--gray-700);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+            transition: var(--transition);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.8rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: var(--gray-800);
+            background-color: white;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+            outline: none;
+        }
+
+        .form-control:focus ~ .input-icon {
+            color: var(--primary);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: var(--gray-500);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-password:hover {
+            color: var(--primary);
+        }
+
+        /* Estilos para mensajes flash */
+        .flash-messages {
+            margin-bottom: 1.5rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .alert-danger {
+            background-color: rgba(217, 4, 41, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(217, 4, 41, 0.2);
+        }
+
+        .alert-success {
+            background-color: rgba(56, 176, 0, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(56, 176, 0, 0.2);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn-icon {
+            margin-right: 0.5rem;
+        }
+
+        .form-footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .form-footer a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            color: var(--gray-600);
+            font-size: 0.8rem;
+        }
+
+        .security-badge i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        /* === ANIMACIONES === */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 992px) {
+            .auth-container {
+                flex-direction: column;
+                max-width: 600px;
+                min-height: auto;
+            }
+            
+            .side-panel, .form-panel {
+                width: 100%;
+                padding: 2rem;
+            }
+            
+            .side-panel {
+                min-height: 350px;
+            }
+            
+            .feature-list {
+                margin-top: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-panel {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Panel lateral con información -->
+        <div class="side-panel">
+            <div class="side-content">
+                <div>
+                    <div class="brand">
+                        <div class="logo-container floating">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div class="brand-name">SISTEMA DE ASISTENCIAS</div>
+                    </div>
+                    
+                    <div class="headline">
+                        <h2>Bienvenido de nuevo</h2>
+                        <p>Inicia sesión para acceder al panel de control y gestionar todas las funciones administrativas.</p>
+                        
+                        <div class="feature-list">
+                            <div class="feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <div class="feature-text">Gestión de códigos QR</div>
+                            </div>
+                            
+                            <div class="feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="feature-text">Estadísticas en tiempo real</div>
+                            </div>
+                            
+                            <div class="feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="feature-text">Control de usuarios</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="side-footer">
+                    <p>© 2025 Sistema de Gestión de Asistencias. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Panel de formulario -->
+        <div class="form-panel">
+            <div class="form-header">
+                <h2 class="form-title">Iniciar Sesión</h2>
+                <p class="form-subtitle">Ingresa tus credenciales para acceder</p>
+            </div>
+            
+            <!-- Mensajes Flash de Flask -->
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            
+            <form id="loginForm" action="{{ url_for('login_root') }}" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <div class="input-group">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-control" 
+                            required
+                        >
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <div class="input-group password-container">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-control" 
+                            required
+                        >
+                        <i class="fas fa-lock input-icon"></i>
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-sign-in-alt btn-icon"></i>
+                    Iniciar sesión
+                </button>
+            </form>
+            
+            <div class="form-footer">
+                <p>¿No tienes cuenta? <a href="{{ url_for('register_root') }}">Registrarse</a></p>
+            </div>
+            
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                Acceso seguro al panel de administración
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Referencias DOM
+            const passwordInput = document.getElementById('password');
+            const togglePassword = document.getElementById('togglePassword');
+            
+            // Mostrar/ocultar contraseña
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                // Cambiar icono
+                const icon = togglePassword.querySelector('i');
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+            });
+            
+            // Cerrar automáticamente las alertas después de 5 segundos
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    alert.style.opacity = '0';
+                    setTimeout(function() {
+                        alert.style.display = 'none';
+                    }, 500);
+                }, 5000);
+            });
+            
+            // Verificar si hay un mensaje de éxito después del registro
+            const successMessage = document.querySelector('.alert-success');
+            if (successMessage) {
+                // Autocompletar el campo de email si viene de un registro exitoso
+                // Esto podría mejorarse usando localStorage o cookies en una implementación real
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email');
+                if (email) {
+                    document.getElementById('email').value = email;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

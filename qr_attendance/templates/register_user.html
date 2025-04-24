@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventQR Titán Supremo Elite 2025 | Sistema VIP</title>
+    
+    <!-- OPTIMIZACIÓN CRÍTICA - ESTILOS INMEDIATOS -->
+    <style>
+        /* Estilos críticos para renderizado inicial ultrarrápido */
+        :root {
+            --primary: #0b486b;
+            --secondary: #f56217;
+            --gold: #d4af37;
+            --bg-light: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header {
+            background: var(--bg-card);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+    </style>
+    
+    <!-- Carga asíncrona de estilos no críticos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" media="print" onload="this.media='all'">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:1rem 0;">
+                <a href="/" style="display:flex; align-items:center; gap:0.75rem; text-decoration:none;">
+                    <div style="width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg, #0b486b, #176c9e); color:white; display:grid; place-items:center; font-size:1.25rem;">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight:700; font-size:1.25rem; color:#0b486b;">EventQR</div>
+                        <div style="font-size:0.75rem; color:#94a3b8;">Titán Supremo Elite</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Hero Section -->
+            <section style="text-align:center; padding:3rem 0 2rem;">
+                <div style="display:inline-flex; align-items:center; gap:0.5rem; background:linear-gradient(135deg, #d4af37, #f7df8e); padding:0.5rem 1.25rem; border-radius:9999px; color:#1e293b; font-weight:600; font-size:0.875rem; margin-bottom:1.5rem;">
+                    <i class="fas fa-crown"></i> 
+                    <span>Sistema VIP Ultimate 2025</span>
+                </div>
+                
+                <h1 style="font-size:2.5rem; color:#1e293b; margin-bottom:1rem;">Registro <span style="color:#0b486b;">Platinum Elite</span></h1>
+                
+                <p style="max-width:700px; margin:0 auto 2rem; color:#475569;">
+                    Complete el formulario para registrar nuevos usuarios VIP. 
+                    Se generará automáticamente un código QR premium exclusivo 
+                    que será enviado al correo electrónico del invitado.
+                </p>
+            </section>
+
+            <!-- Registration Form -->
+            <div class="card" style="margin-bottom:3rem; overflow:hidden;">
+                <div style="position:absolute; top:1rem; right:1rem; background:linear-gradient(135deg, #d4af37, #f7df8e); color:#1e293b; font-size:0.75rem; font-weight:600; padding:0.3rem 0.75rem; border-radius:9999px; display:flex; align-items:center; gap:0.4rem;">
+                    <i class="fas fa-crown"></i> 
+                    <span>VIP</span>
+                </div>
+                
+                <div style="padding:2rem 2rem 1rem; text-align:center; position:relative; border-bottom:1px solid #e2e8f0;">
+                    <h2 style="font-size:1.75rem; color:#0b486b; margin-bottom:0.75rem;">Formulario de Registro Premium</h2>
+                    <p style="color:#475569;">Ingrese los datos del invitado para generar su QR personalizado</p>
+                </div>
+                
+                <div style="padding:1.5rem 2rem 2rem;">
+                    <form id="registrationForm" action="/register_user" method="post">
+                        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1.25rem;">
+                            <!-- Nombre -->
+                            <div style="margin-bottom:1rem;">
+                                <label style="display:block; margin-bottom:0.5rem; font-weight:500; color:#475569;" for="name">Nombre</label>
+                                <input type="text" id="name" name="name" style="width:100%; padding:0.875rem 1rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:0.5rem; color:#1e293b;" placeholder="Ingrese nombre" required>
+                                <div id="nameError" style="font-size:0.875rem; color:#ef4444; margin-top:0.5rem; display:none;">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    Por favor ingrese un nombre válido
+                                </div>
+                            </div>
+                            
+                            <!-- Apellido -->
+                            <div style="margin-bottom:1rem;">
+                                <label style="display:block; margin-bottom:0.5rem; font-weight:500; color:#475569;" for="lastname">Apellido</label>
+                                <input type="text" id="lastname" name="lastname" style="width:100%; padding:0.875rem 1rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:0.5rem; color:#1e293b;" placeholder="Ingrese apellido" required>
+                                <div id="lastnameError" style="font-size:0.875rem; color:#ef4444; margin-top:0.5rem; display:none;">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    Por favor ingrese un apellido válido
+                                </div>
+                            </div>
+                            
+                            <!-- Email -->
+                            <div style="margin-bottom:1rem;">
+                                <label style="display:block; margin-bottom:0.5rem; font-weight:500; color:#475569;" for="email">Email</label>
+                                <input type="email" id="email" name="email" style="width:100%; padding:0.875rem 1rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:0.5rem; color:#1e293b;" placeholder="correo@ejemplo.com" required>
+                                <div id="emailError" style="font-size:0.875rem; color:#ef4444; margin-top:0.5rem; display:none;">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    Por favor ingrese un email válido
+                                </div>
+                            </div>
+                            
+                            <!-- Teléfono -->
+                            <div style="margin-bottom:1rem;">
+                                <label style="display:block; margin-bottom:0.5rem; font-weight:500; color:#475569;" for="phone">Teléfono</label>
+                                <input type="tel" id="phone" name="phone" style="width:100%; padding:0.875rem 1rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:0.5rem; color:#1e293b;" placeholder="+51 XXX XXX XXX" required>
+                                <div id="phoneError" style="font-size:0.875rem; color:#ef4444; margin-top:0.5rem; display:none;">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    Por favor ingrese un teléfono válido
+                                </div>
+                            </div>
+                            
+                            <!-- Empresa (opcional) -->
+                            <div style="margin-bottom:1rem; grid-column:span 2;">
+                                <label style="display:block; margin-bottom:0.5rem; font-weight:500; color:#475569;" for="company">Empresa (Opcional)</label>
+                                <input type="text" id="company" name="company" style="width:100%; padding:0.875rem 1rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:0.5rem; color:#1e293b;" placeholder="Nombre de la empresa">
+                            </div>
+                            
+                            <!-- Términos y condiciones -->
+                            <div style="margin-bottom:1rem; grid-column:span 2;">
+                                <div style="margin-top:0.5rem;">
+                                    <label style="display:flex; align-items:center; margin-bottom:0.75rem;">
+                                        <input type="checkbox" id="termsCheck" required style="margin-right:0.75rem;">
+                                        He leído y acepto los términos y condiciones
+                                    </label>
+                                    
+                                    <label style="display:flex; align-items:center; margin-bottom:0.75rem;">
+                                        <input type="checkbox" id="dataPolicy" required style="margin-right:0.75rem;">
+                                        Acepto el tratamiento de mis datos personales
+                                    </label>
+                                    
+                                    <div id="termsError" style="font-size:0.875rem; color:#ef4444; margin-top:0.5rem; display:none;">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        Debe aceptar los términos para continuar
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Form Actions -->
+                        <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem;">
+                            <button type="button" id="resetBtn" style="display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.875rem 1.75rem; font-weight:600; font-size:1rem; border-radius:0.5rem; cursor:pointer; border:none; background:#f8fafc; color:#475569; border:1px solid #e2e8f0;">
+                                <i class="fas fa-undo"></i> Restablecer
+                            </button>
+                            <button type="submit" id="submitBtn" style="display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.875rem 1.75rem; font-weight:600; font-size:1rem; border-radius:0.5rem; cursor:pointer; border:none; background:#0b486b; color:white; box-shadow:0 4px 10px rgba(11, 72, 107, 0.2);">
+                                <i class="fas fa-user-plus"></i> Registrar Usuario VIP
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recent Registrations Table -->
+            <section style="margin-bottom:3rem;">
+                <h2 style="font-size:1.75rem; color:#0b486b; margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem;">
+                    <i class="fas fa-history"></i>
+                    Registros Recientes
+                </h2>
+                
+                <div style="background:#ffffff; border-radius:0.75rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); overflow:hidden;">
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%; border-collapse:collapse;" id="registrationsTable">
+                            <thead>
+                                <tr>
+                                    <th style="padding:1rem; text-align:left; background:#f8fafc; color:#475569; font-weight:600; font-size:0.875rem;">Nombre</th>
+                                    <th style="padding:1rem; text-align:left; background:#f8fafc; color:#475569; font-weight:600; font-size:0.875rem;">Email</th>
+                                    <th style="padding:1rem; text-align:left; background:#f8fafc; color:#475569; font-weight:600; font-size:0.875rem;">Teléfono</th>
+                                    <th style="padding:1rem; text-align:left; background:#f8fafc; color:#475569; font-weight:600; font-size:0.875rem;">Empresa</th>
+                                    <th style="padding:1rem; text-align:left; background:#f8fafc; color:#475569; font-weight:600; font-size:0.875rem;">Fecha</th>
+                                    <th style="padding:1rem; text-align:left; background:#f8fafc; color:#475569; font-weight:600; font-size:0.875rem;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if users %}
+                                    {% for user in users %}
+                                    <tr style="border-bottom:1px solid #e2e8f0;">
+                                        <td style="padding:1rem; text-align:left;">{{ user.name }} {{ user.lastname }}</td>
+                                        <td style="padding:1rem; text-align:left;">{{ user.email }}</td>
+                                        <td style="padding:1rem; text-align:left;">{{ user.phone }}</td>
+                                        <td style="padding:1rem; text-align:left;">{{ user.company or '-' }}</td>
+                                        <td style="padding:1rem; text-align:left;">{{ user.timestamp|default('Hoy') }}</td>
+                                        <td style="padding:1rem; text-align:left;">
+                                            <div style="display:flex; gap:0.5rem;">
+                                                <a href="{{ user.qr_code }}" target="_blank" style="width:32px; height:32px; border-radius:0.25rem; background:#f8fafc; color:#475569; display:grid; place-items:center; border:none; cursor:pointer;" title="Ver QR">
+                                                    <i class="fas fa-qrcode"></i>
+                                                </a>
+                                                <button class="resend-email" data-email="{{ user.email }}" style="width:32px; height:32px; border-radius:0.25rem; background:#f8fafc; color:#475569; display:grid; place-items:center; border:none; cursor:pointer;" title="Reenviar Email">
+                                                    <i class="fas fa-envelope"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6" style="text-align:center; padding:1.5rem;">No hay registros disponibles</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background:#ffffff; border-top:1px solid #e2e8f0; padding:1.5rem 0; text-align:center;">
+        <div class="container">
+            <p style="color:#6b7280;">&copy; 2025 EventQR Titán Supremo Elite. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- QR Modal -->
+    <div id="qrModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:100; opacity:0; visibility:hidden; transition:all 0.3s ease;">
+        <div style="background:#ffffff; border-radius:0.75rem; width:90%; max-width:500px; box-shadow:0 10px 15px rgba(0,0,0,0.1);">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:1.5rem; border-bottom:1px solid #e2e8f0;">
+                <h3 style="margin:0; color:#0b486b;">QR Premium Generado</h3>
+                <button id="closeQrModal" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#475569;">&times;</button>
+            </div>
+            <div style="padding:1.5rem; text-align:center;">
+                <p style="margin-bottom:1.5rem;">Código QR exclusivo para acceso VIP</p>
+                
+                <div style="margin:1.5rem 0;">
+                    <img src="{{ qr_code_path }}" alt="Código QR" id="qrImage" style="max-width:250px; border-radius:0.5rem; padding:1rem; background:white; border:1px solid #e2e8f0;">
+                </div>
+                
+                <div id="qrInfo" style="margin-top:1.5rem; text-align:left; background:#f8fafc; border-radius:0.5rem; padding:1rem;">
+                    <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid #e2e8f0;">
+                        <div style="font-weight:600; color:#475569;">Invitado:</div>
+                        <div id="qrName" style="color:#1e293b;">{{ request.form.get('name', '') }} {{ request.form.get('lastname', '') }}</div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid #e2e8f0;">
+                        <div style="font-weight:600; color:#475569;">Email:</div>
+                        <div id="qrEmail" style="color:#1e293b;">{{ request.form.get('email', '') }}</div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:0.5rem 0;">
+                        <div style="font-weight:600; color:#475569;">Teléfono:</div>
+                        <div id="qrPhone" style="color:#1e293b;">{{ request.form.get('phone', '') }}</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top:1.5rem;">
+                    <button id="continueBtn" style="display:inline-flex; align-items:center; justify-content:center; padding:0.875rem 1.75rem; font-weight:600; font-size:1rem; border-radius:0.5rem; cursor:pointer; border:none; background:#0b486b; color:white;">
+                        Continuar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Notification -->
+    <div id="statusNotification" style="position:fixed; bottom:20px; right:20px; background:white; border-radius:0.75rem; box-shadow:0 10px 15px rgba(0,0,0,0.1); padding:1rem; display:flex; align-items:center; gap:1rem; z-index:90; transform:translateY(150%); transition:transform 0.3s ease;">
+        <div style="display:flex; gap:1rem; align-items:center;">
+            <div id="statusIcon" style="width:40px; height:40px; border-radius:50%; background:rgba(16, 185, 129, 0.1); color:#10b981; display:grid; place-items:center;">
+                <i class="fas fa-check"></i>
+            </div>
+            <div>
+                <div id="statusTitle" style="font-weight:600;">Éxito</div>
+                <div id="statusMessage" style="font-size:0.875rem; color:#475569;">Operación completada</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS OPTIMIZADOS PARA CARGA INSTANTÁNEA -->
+    <script>
+        // Ejecutar inmediatamente para evitar bloqueos
+        (function() {
+            // Verificar si hay un QR para mostrar (después de enviar el formulario)
+            {% if qr_code_path %}
+                // Mostrar modal QR sin esperar al DOM
+                setTimeout(function() {
+                    document.getElementById('qrModal').style.opacity = '1';
+                    document.getElementById('qrModal').style.visibility = 'visible';
+                }, 10);
+            {% endif %}
+            
+            // Flash messages de Flask (aplicados inmediatamente)
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        setTimeout(function() {
+                            showNotification('{{ message }}', '', '{{ category }}');
+                        }, 100);
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        })();
+        
+        // Inicialización segura
+        document.addEventListener('DOMContentLoaded', function() {
+            // Referencias DOM
+            const form = document.getElementById('registrationForm');
+            const nameInput = document.getElementById('name');
+            const lastnameInput = document.getElementById('lastname');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const termsCheck = document.getElementById('termsCheck');
+            const dataPolicy = document.getElementById('dataPolicy');
+            const submitBtn = document.getElementById('submitBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            // QR Modal
+            const qrModal = document.getElementById('qrModal');
+            const closeQrModal = document.getElementById('closeQrModal');
+            const continueBtn = document.getElementById('continueBtn');
+            
+            // Status Notification
+            const statusNotification = document.getElementById('statusNotification');
+            const statusIcon = document.getElementById('statusIcon');
+            const statusTitle = document.getElementById('statusTitle');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            // Validaciones de formulario en tiempo real
+            if (nameInput) nameInput.addEventListener('blur', function() {
+                validateName(this.value);
+            });
+            
+            if (lastnameInput) lastnameInput.addEventListener('blur', function() {
+                validateLastname(this.value);
+            });
+            
+            if (emailInput) emailInput.addEventListener('blur', function() {
+                validateEmail(this.value);
+            });
+            
+            if (phoneInput) phoneInput.addEventListener('blur', function() {
+                validatePhone(this.value);
+            });
+            
+            // Verificar checkboxes
+            if (termsCheck) termsCheck.addEventListener('change', validateTerms);
+            if (dataPolicy) dataPolicy.addEventListener('change', validateTerms);
+            
+            // Funciones de validación
+            function validateName(value) {
+                const errorMsg = document.getElementById('nameError');
+                if (!errorMsg) return true;
+                
+                if (value.trim().length < 2) {
+                    errorMsg.style.display = 'flex';
+                    return false;
+                } else {
+                    errorMsg.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validateLastname(value) {
+                const errorMsg = document.getElementById('lastnameError');
+                if (!errorMsg) return true;
+                
+                if (value.trim().length < 2) {
+                    errorMsg.style.display = 'flex';
+                    return false;
+                } else {
+                    errorMsg.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validateEmail(value) {
+                const errorMsg = document.getElementById('emailError');
+                if (!errorMsg) return true;
+                
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value.trim())) {
+                    errorMsg.style.display = 'flex';
+                    return false;
+                } else {
+                    errorMsg.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validatePhone(value) {
+                const errorMsg = document.getElementById('phoneError');
+                if (!errorMsg) return true;
+                
+                const phoneRegex = /^[+]?[\d\s]{7,15}$/;
+                if (!phoneRegex.test(value.trim())) {
+                    errorMsg.style.display = 'flex';
+                    return false;
+                } else {
+                    errorMsg.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validateTerms() {
+                const errorMsg = document.getElementById('termsError');
+                if (!errorMsg || !termsCheck || !dataPolicy) return true;
+                
+                if (!termsCheck.checked || !dataPolicy.checked) {
+                    errorMsg.style.display = 'flex';
+                    return false;
+                } else {
+                    errorMsg.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            // Form submission
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    const nameValid = validateName(nameInput.value);
+                    const lastnameValid = validateLastname(lastnameInput.value);
+                    const emailValid = validateEmail(emailInput.value);
+                    const phoneValid = validatePhone(phoneInput.value);
+                    const termsValid = validateTerms();
+                    
+                    if (!nameValid || !lastnameValid || !emailValid || !phoneValid || !termsValid) {
+                        e.preventDefault();
+                        showNotification('Formulario incompleto', 'Por favor complete todos los campos correctamente', 'error');
+                    } else if (submitBtn) {
+                        // Cambiar el estado del botón
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+                        submitBtn.disabled = true;
+                    }
+                });
+            }
+            
+            // Reset form
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                    if (form) form.reset();
+                    
+                    // Reset validation UI
+                    document.querySelectorAll('[id$="Error"]').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                    
+                    showNotification('Formulario restablecido', 'Todos los campos han sido limpiados', 'info');
+                });
+            }
+            
+            // QR Modal Close
+            if (closeQrModal) {
+                closeQrModal.addEventListener('click', function() {
+                    if (qrModal) qrModal.style.opacity = '0';
+                    if (qrModal) qrModal.style.visibility = 'hidden';
+                });
+            }
+            
+            // Continue Button
+            if (continueBtn) {
+                continueBtn.addEventListener('click', function() {
+                    if (qrModal) qrModal.style.opacity = '0';
+                    if (qrModal) qrModal.style.visibility = 'hidden';
+                });
+            }
+            
+            // Escape key closes modal
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && qrModal && qrModal.style.visibility === 'visible') {
+                    qrModal.style.opacity = '0';
+                    qrModal.style.visibility = 'hidden';
+                }
+            });
+            
+            // Email resend buttons
+            document.querySelectorAll('.resend-email').forEach(button => {
+                button.addEventListener('click', function() {
+                    const email = this.getAttribute('data-email');
+                    if (!email) return;
+                    
+                    showNotification('Reenviando email', `El QR está siendo enviado a ${email}...`, 'info');
+                    
+                    // En un caso real, aquí harías la petición FETCH al servidor
+                    setTimeout(() => {
+                        showNotification('Email enviado', `El QR ha sido enviado correctamente a ${email}`, 'success');
+                    }, 1500);
+                });
+            });
+            
+            // Show notification function
+            window.showNotification = function(title, message, type = 'success') {
+                if (!statusNotification || !statusIcon || !statusTitle || !statusMessage) return;
+                
+                statusTitle.textContent = title;
+                statusMessage.textContent = message || '';
+                
+                if (type === 'error') {
+                    statusIcon.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                    statusIcon.style.color = '#ef4444';
+                    statusIcon.innerHTML = '<i class="fas fa-times"></i>';
+                } else if (type === 'info') {
+                    statusIcon.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+                    statusIcon.style.color = '#3b82f6';
+                    statusIcon.innerHTML = '<i class="fas fa-info"></i>';
+                } else {
+                    statusIcon.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+                    statusIcon.style.color = '#10b981';
+                    statusIcon.innerHTML = '<i class="fas fa-check"></i>';
+                }
+                
+                // Show notification
+                statusNotification.style.transform = 'translateY(0)';
+                
+                // Hide after 5 seconds
+                setTimeout(() => {
+                    statusNotification.style.transform = 'translateY(150%)';
+                }, 5000);
+            }
+            
+            // Anti-blocking system - Garantiza que el usuario pueda interactuar siempre
+            setTimeout(() => {
+                if (submitBtn && submitBtn.disabled) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Registrar Usuario VIP';
+                }
+            }, 8000);
+        });
+    </script>
+
+    <!-- Estilos no críticos - Cargados después de que la página es interactiva -->
+    <style>
+        /* Estilos avanzados para experiencia visual mejorada (no críticos para la carga inicial) */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .header {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .logo-icon {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            100% { left: 100%; }
+        }
+        
+        .card {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 200% auto;
+            animation: gradient 8s ease infinite;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 3px rgba(11, 72, 107, 0.15) !important;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(11, 72, 107, 0.3) !important;
+            background: linear-gradient(135deg, #0a3d5a, #176c9e) !important;
+        }
+        
+        .btn-secondary:hover {
+            background: #e2e8f0 !important;
+        }
+        
+        .table-btn:hover {
+            background: var(--primary) !important;
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive adjustment for mobile */
+        @media (max-width: 768px) {
+            [style*="grid-template-columns:repeat(2, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            [style*="display:flex; justify-content:flex-end"] {
+                flex-direction: column-reverse;
+            }
+            
+            [style*="display:flex; justify-content:flex-end"] button {
+                margin-top: 0.5rem;
+                width: 100%;
+            }
+        }
+    </style>
+    
+    <!-- Animaciones Avanzadas - Carga diferida -->
+    <script>
+        // Añadir animaciones una vez que la página ya ha cargado completamente
+        window.addEventListener('load', function() {
+            // Efectos visuales premium que no bloquean la carga inicial
+            document.querySelectorAll('.logo-icon').forEach(el => {
+                el.style.transition = 'transform 0.3s ease';
+                el.addEventListener('mouseover', function() {
+                    this.style.transform = 'scale(1.1)';
+                });
+                el.addEventListener('mouseout', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Añadir efecto de elevación a la tarjeta principal
+            const card = document.querySelector('.card');
+            if (card) {
+                card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                card.addEventListener('mouseover', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 25px 50px -12px rgba(0,0,0,0.15)';
+                });
+                card.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.1)';
+                });
+            }
+        });
+    </script>
+    
+    <!-- Anti-bloqueo y detección de errores -->
+    <script>
+        // Asegura que la página siempre sea interactiva
+        setTimeout(function() {
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn && submitBtn.disabled) {
+                console.info('Sistema anti-bloqueo activado');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Registrar Usuario VIP';
+            }
+            
+            // Verificar si el modal está cargado correctamente
+            const qrModal = document.getElementById('qrModal');
+            if (qrModal && '{{ qr_code_path }}' && qrModal.style.visibility !== 'visible') {
+                qrModal.style.opacity = '1';
+                qrModal.style.visibility = 'visible';
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

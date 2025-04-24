@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Administrador</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .donut-chart {
+            margin-top: 20px;
+        }
+
+        canvas {
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* User List Table */
+        .user-list {
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f7f6;
+            color: #333;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+
+        /* Assistance Status */
+        .attended {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .not-attended {
+            color: #F44336;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Registros de Asistencia</h2>
+            <div class="donut-chart">
+                <canvas id="attendanceChart" width="200" height="200"></canvas>
+            </div>
+        </header>
+        <div class="user-list">
+            <h3>Usuarios Registrados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Asistencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.name }} {{ user.lastname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td id="attendance-{{ user.email }}">
+                            {% if user.attended %}
+                                <span class="attended">Asistió</span>
+                            {% else %}
+                                <span class="not-attended">No Asistió</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        var attended = {{ attended_count }};
+        var not_attended = {{ not_attended_count }};
+        var total = attended + not_attended;
+        var percentage = (attended / total) * 100;
+
+        var ctx = document.getElementById('attendanceChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Asistieron', 'No Asistieron'],
+                datasets: [{
+                    data: [attended, not_attended],
+                    backgroundColor: ['#4CAF50', '#F44336'],
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

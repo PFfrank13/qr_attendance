@@ -1,0 +1,2526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de administración premium para gestión de asistencia de eventos">
+    <meta name="author" content="EventQR Pro">
+    <title>EventQR Pro | Panel de Administración</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Data Tables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    
+    <!-- ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+    <!-- CountUp.js -->
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.min.js"></script>
+
+    <!-- Animation Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js" defer></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js" defer></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js" defer></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js" defer></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js" defer></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <style>
+        :root {
+            /* ===== Color System ===== */
+            /* Primary Colors - Indigo */
+            --primary-50: #eef2ff;
+            --primary-100: #e0e7ff;
+            --primary-200: #c7d2fe;
+            --primary-300: #a5b4fc;
+            --primary-400: #818cf8;
+            --primary-500: #6366f1;
+            --primary-600: #4f46e5;
+            --primary-700: #4338ca;
+            --primary-800: #3730a3;
+            --primary-900: #312e81;
+            --primary-950: #1e1b67;
+            
+            /* Success Colors - Emerald */
+            --success-50: #ecfdf5;
+            --success-100: #d1fae5;
+            --success-200: #a7f3d0;
+            --success-300: #6ee7b7;
+            --success-400: #34d399;
+            --success-500: #10b981;
+            --success-600: #059669;
+            --success-700: #047857;
+            --success-800: #065f46;
+            --success-900: #064e3b;
+            
+            /* Warning Colors - Amber */
+            --warning-50: #fffbeb;
+            --warning-100: #fef3c7;
+            --warning-200: #fde68a;
+            --warning-300: #fcd34d;
+            --warning-400: #fbbf24;
+            --warning-500: #f59e0b;
+            --warning-600: #d97706;
+            --warning-700: #b45309;
+            --warning-800: #92400e;
+            --warning-900: #78350f;
+
+            /* Danger Colors - Rose */
+            --danger-50: #fff1f2;
+            --danger-100: #ffe4e6;
+            --danger-200: #fecdd3;
+            --danger-300: #fda4af;
+            --danger-400: #fb7185;
+            --danger-500: #f43f5e;
+            --danger-600: #e11d48;
+            --danger-700: #be123c;
+            --danger-800: #9f1239;
+            --danger-900: #881337;
+
+            /* Info Colors - Sky */
+            --info-50: #f0f9ff;
+            --info-100: #e0f2fe;
+            --info-200: #bae6fd;
+            --info-300: #7dd3fc;
+            --info-400: #38bdf8;
+            --info-500: #0ea5e9;
+            --info-600: #0284c7;
+            --info-700: #0369a1;
+            --info-800: #075985;
+            --info-900: #0c4a6e;
+
+            /* Neutral Colors - Slate */
+            --neutral-50: #f8fafc;
+            --neutral-100: #f1f5f9;
+            --neutral-200: #e2e8f0;
+            --neutral-300: #cbd5e1;
+            --neutral-400: #94a3b8;
+            --neutral-500: #64748b;
+            --neutral-600: #475569;
+            --neutral-700: #334155;
+            --neutral-800: #1e293b;
+            --neutral-900: #0f172a;
+            --neutral-950: #020617;
+
+            /* ===== Glass Effect ===== */
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-bg-dark: rgba(15, 23, 42, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-border-dark: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            --glass-blur: blur(16px);
+
+            /* ===== Theme Colors ===== */
+            /* Light Theme (default) */
+            --body-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --sidebar-bg: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-tertiary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --divider-color: #e2e8f0;
+
+            /* ===== Effects ===== */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+            
+            /* ===== Shape ===== */
+            --radius-xs: 0.125rem;
+            --radius-sm: 0.25rem;
+            --radius: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* ===== Transitions ===== */
+            --transition-base: all 0.2s ease;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            
+            /* ===== Layout & Spacing ===== */
+            --header-height: 70px;
+            --sidebar-width: 280px;
+            --sidebar-collapsed-width: 80px;
+            
+            /* ===== Z-index layers ===== */
+            --z-sidebar: 40;
+            --z-header: 30;
+            --z-overlay: 20;
+            --z-dropdown: 50;
+            --z-tooltip: 60;
+            --z-modal: 70;
+            
+            /* ===== Component specific ===== */
+            --stat-card-gradient-from: rgba(99, 102, 241, 0.85);
+            --stat-card-gradient-to: rgba(79, 70, 229, 1);
+            --card-hover-transform: translateY(-5px);
+        }
+
+        /* Dark theme variables */
+        [data-theme="dark"] {
+            --body-bg: #0f172a;
+            --card-bg: #1e293b;
+            --header-bg: rgba(30, 41, 59, 0.9);
+            --sidebar-bg: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --divider-color: #334155;
+            
+            /* Glass Effect - Dark */
+            --glass-bg: var(--glass-bg-dark);
+            --glass-border: var(--glass-border-dark);
+            
+            color-scheme: dark;
+        }
+
+        /* ===== Reset & Base Styles ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 0.9375rem;
+            min-height: 100vh;
+            transition: background-color 0.5s ease;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 10% 0%, rgba(99, 102, 241, 0.03) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(16, 185, 129, 0.03) 0px, transparent 50%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        [data-theme="dark"] body {
+            background-image: 
+                radial-gradient(at 10% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-600);
+            transition: var(--transition-base);
+        }
+
+        a:hover {
+            color: var(--primary-700);
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        /* ===== Layout Components ===== */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: var(--sidebar-width) 1fr;
+            grid-template-rows: var(--header-height) 1fr;
+            grid-template-areas: 
+                "sidebar header"
+                "sidebar main";
+            height: 100vh;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .dashboard-container.collapsed {
+            grid-template-columns: var(--sidebar-collapsed-width) 1fr;
+        }
+
+        /* Header */
+        .dashboard-header {
+            grid-area: header;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: var(--z-header);
+            transition: var(--transition-smooth);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            height: var(--header-height);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-sidebar {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-right: 1.5rem;
+            color: var(--text-secondary);
+            transition: var(--transition-bounce);
+        }
+
+        .toggle-sidebar:hover {
+            background-color: var(--primary-50);
+            color: var(--primary-600);
+            border-color: var(--primary-200);
+            box-shadow: var(--shadow-md);
+            transform: scale(1.05);
+        }
+
+        .toggle-sidebar:active {
+            transform: scale(0.95);
+        }
+
+        [data-theme="dark"] .toggle-sidebar:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary-300);
+            border-color: var(--primary-800);
+        }
+
+        .page-title {
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-icon-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-icon-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-600);
+            opacity: 0;
+            z-index: -1;
+            transform: scale(0);
+            border-radius: inherit;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .header-icon-btn:hover::before {
+            opacity: 0.08;
+            transform: scale(1);
+        }
+
+        .header-icon-btn:hover {
+            color: var(--primary-600);
+            border-color: var(--primary-200);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .header-icon-btn:active {
+            transform: translateY(0);
+        }
+
+        [data-theme="dark"] .header-icon-btn:hover {
+            color: var(--primary-300);
+            border-color: var(--primary-800);
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+
+        .notification-indicator {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 18px;
+            height: 18px;
+            border-radius: var(--radius-full);
+            background-color: var(--danger-500);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--header-bg);
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-left: 0.75rem;
+            border-left: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: var(--transition-base);
+            border-radius: var(--radius);
+            padding: 0.5rem 0.75rem;
+        }
+
+        .user-profile:hover {
+            background-color: var(--primary-50);
+        }
+
+        [data-theme="dark"] .user-profile:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background-color: var(--primary-100);
+            color: var(--primary-700);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--primary-200);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, var(--primary-300), transparent);
+            opacity: 0.5;
+            transform: rotate(0deg);
+            transition: all 1s ease;
+        }
+
+        .user-profile:hover .avatar::after {
+            transform: rotate(180deg);
+        }
+
+        [data-theme="dark"] .avatar {
+            background-color: var(--primary-800);
+            color: var(--primary-200);
+            border-color: var(--primary-700);
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.3;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+        }
+
+        .user-role {
+            font-size: 0.8125rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Sidebar */
+        .dashboard-sidebar {
+            grid-area: sidebar;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+            width: var(--sidebar-width);
+            z-index: var(--z-sidebar);
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dashboard-container.collapsed .dashboard-sidebar {
+            width: var(--sidebar-collapsed-width);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
+            color: white;
+            font-size: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+        }
+
+        .logo-icon::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+        }
+
+        .logo:hover .logo-icon::before {
+            transform: translateX(100%);
+        }
+
+        .sidebar-menu {
+            flex: 1;
+        }
+
+        .sidebar-menu-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section-title {
+            padding: 0 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-secondary);
+            border-radius: 0;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-link::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-400), var(--primary-600));
+            transition: height 0.3s ease;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .sidebar-link:hover {
+            color: var(--primary-600);
+            background-color: var(--primary-50);
+        }
+
+        .sidebar-link:hover::before {
+            height: 50%;
+        }
+
+        [data-theme="dark"] .sidebar-link:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary-300);
+        }
+
+        .sidebar-link.active {
+            color: var(--primary-600);
+            background-color: var(--primary-50);
+            font-weight: 600;
+        }
+
+        .sidebar-link.active::before {
+            height: 80%;
+        }
+
+        [data-theme="dark"] .sidebar-link.active {
+            background-color: rgba(79, 70, 229, 0.15);
+            color: var(--primary-300);
+        }
+
+        .sidebar-link i {
+            font-size: 1.125rem;
+            width: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-link:hover i {
+            transform: translateX(2px);
+        }
+
+        .sidebar-link-text {
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-container.collapsed .sidebar-link-text,
+        .dashboard-container.collapsed .sidebar-section-title,
+        .dashboard-container.collapsed .logo-text {
+            opacity: 0;
+            visibility: hidden;
+            white-space: nowrap;
+            width: 0;
+        }
+
+        .sidebar-footer {
+            padding: 1rem 1.5rem;
+            margin-top: auto;
+            border-top: 1px solid var(--divider-color);
+        }
+
+        .theme-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+            margin-left: auto;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--neutral-300);
+            transition: .4s;
+            border-radius: var(--radius-full);
+        }
+
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: var(--radius-full);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input:checked + .switch-slider {
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+        }
+
+        input:checked + .switch-slider:before {
+            transform: translateX(24px);
+        }
+
+        .switch-slider::after {
+            content: "☀️";
+            position: absolute;
+            right: 6px;
+            top: 4px;
+            font-size: 0.65rem;
+            color: var(--neutral-600);
+            transition: all 0.3s ease;
+        }
+
+        input:checked + .switch-slider::after {
+            content: "🌙";
+            left: 6px;
+            right: auto;
+            color: white;
+        }
+
+        /* Main Content */
+        .dashboard-main {
+            grid-area: main;
+            padding: 2rem 2.5rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Flash Messages */
+        .alert-container {
+            margin-bottom: 2rem;
+        }
+
+        .alert {
+            padding: 1rem 1.25rem;
+            border-left: 4px solid transparent;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            box-shadow: var(--shadow-md);
+        }
+
+        .alert-success {
+            background-color: var(--success-50);
+            border-color: var(--success-500);
+            color: var(--success-700);
+        }
+
+        .alert-danger {
+            background-color: var(--danger-50);
+            border-color: var(--danger-500);
+            color: var(--danger-700);
+        }
+
+        [data-theme="dark"] .alert-success {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-color: var(--success-600);
+            color: var(--success-300);
+        }
+
+        [data-theme="dark"] .alert-danger {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: var(--danger-600);
+            color: var(--danger-300);
+        }
+
+        .alert-icon {
+            font-size: 1.25rem;
+            margin-right: 0.875rem;
+        }
+
+        /* Date/Time Display */
+        .datetime-display {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            padding: 0.75rem 1.25rem;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            animation: fade-in 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .datetime-display::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-400), var(--primary-600));
+        }
+
+        .datetime-icon {
+            color: var(--primary-600);
+            font-size: 1.2rem;
+        }
+
+        .datetime-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .datetime-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+
+        .datetime-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Auto-refresh Indicator */
+        .refresh-container {
+            margin-bottom: 2rem;
+        }
+
+        .refresh-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 rgba(79, 70, 229, 0.4);
+        }
+
+        .refresh-progress-container {
+            height: 4px;
+            width: 100%;
+            background-color: var(--neutral-200);
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-full);
+        }
+
+        [data-theme="dark"] .refresh-progress-container {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .refresh-progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-500), var(--primary-600));
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: var(--radius-full);
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            transform: translateZ(0);
+            position: relative;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: var(--card-hover-transform);
+        }
+
+        /* Card with glass effect */
+        .card-glass {
+            background-color: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-color: var(--glass-border);
+        }
+
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--card-bg);
+        }
+
+        .card-header.no-border {
+            border-bottom: none;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-title i {
+            color: var(--primary-600);
+            font-size: 1.25rem;
+        }
+
+        [data-theme="dark"] .card-title i {
+            color: var(--primary-400);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-footer {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: none;
+            height: 100%;
+            min-height: 160px;
+        }
+
+        /* Premium stat cards with gradients */
+        .stat-card--primary {
+            background: linear-gradient(135deg, var(--stat-card-gradient-from), var(--stat-card-gradient-to));
+            color: white;
+        }
+
+        .stat-card--success {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.85), rgba(5, 150, 105, 1));
+            color: white;
+        }
+
+        .stat-card--warning {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.85), rgba(217, 119, 6, 1));
+            color: white;
+        }
+
+        .stat-card--danger {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.85), rgba(220, 38, 38, 1));
+            color: white;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+        }
+
+        .stat-card:hover::after {
+            transform: translateX(100%);
+        }
+
+        .stat-icon {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 7rem;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .stat-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .stat-comparison {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: auto;
+        }
+
+        .stat-change-positive, 
+        .stat-change-negative {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .stat-progress {
+            margin-top: 1.25rem;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .stat-progress-bar {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-full);
+            transition: width 1.5s ease;
+        }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            position: relative;
+            min-height: 300px;
+            padding: 1rem;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: var(--transition-base);
+        }
+
+        .legend-item:hover {
+            transform: translateY(-2px);
+            color: var(--text-primary);
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: var(--radius-full);
+        }
+
+        .chart-container canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Table/Data Grid */
+        .table-container {
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-box {
+            position: relative;
+            width: 280px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.625rem 1rem 0.625rem 2.5rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border-color);
+            background-color: var(--body-bg);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            transition: var(--transition-base);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        [data-theme="dark"] .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        /* Table Styling */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table thead th {
+            background-color: var(--body-bg);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+            position: relative;
+        }
+
+        .data-table thead th::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, var(--primary-400), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .data-table thead th:hover::after {
+            transform: scaleX(1);
+        }
+
+        .data-table tbody tr {
+            background-color: transparent;
+            transition: var(--transition-base);
+        }
+
+        .data-table tbody tr:hover {
+            background-color: var(--primary-50);
+        }
+
+        [data-theme="dark"] .data-table tbody tr:hover {
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .data-table tbody td {
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+            font-size: 0.9375rem;
+            color: var(--text-primary);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Status Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .badge-success {
+            background: linear-gradient(to right, var(--success-50), var(--success-100));
+            color: var(--success-700);
+            border: 1px solid var(--success-200);
+        }
+
+        .badge-warning {
+            background: linear-gradient(to right, var(--warning-50), var(--warning-100));
+            color: var(--warning-700);
+            border: 1px solid var(--warning-200);
+        }
+
+        .badge-danger {
+            background: linear-gradient(to right, var(--danger-50), var(--danger-100));
+            color: var(--danger-700);
+            border: 1px solid var(--danger-200);
+        }
+
+        .badge i {
+            font-size: 0.7rem;
+        }
+
+        [data-theme="dark"] .badge-success {
+            background: linear-gradient(to right, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.15));
+            color: var(--success-400);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        [data-theme="dark"] .badge-warning {
+            background: linear-gradient(to right, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.15));
+            color: var(--warning-400);
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        [data-theme="dark"] .badge-danger {
+            background: linear-gradient(to right, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.15));
+            color: var(--danger-400);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            text-transform: none;
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+        }
+
+        .btn:hover::after {
+            transform: translateX(100%);
+            transition: transform 0.8s ease;
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.8125rem;
+        }
+
+        .btn-lg {
+            padding: 0.875rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-lg);
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border-radius: var(--radius);
+        }
+
+        .btn-rounded {
+            border-radius: var(--radius-full);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+            color: white;
+            border-color: var(--primary-700);
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(79, 70, 229, 0.2);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-600), var(--danger-700));
+            color: white;
+            border-color: var(--danger-700);
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(239, 68, 68, 0.2);
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid transparent;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        .action-btn-view {
+            background-color: var(--primary-50);
+            color: var(--primary-600);
+            border-color: var(--primary-100);
+        }
+
+        .action-btn-view:hover {
+            background-color: var(--primary-100);
+            border-color: var(--primary-200);
+        }
+
+        .action-btn-delete {
+            background-color: var(--danger-50);
+            color: var(--danger-600);
+            border-color: var(--danger-100);
+        }
+
+        .action-btn-delete:hover {
+            background-color: var(--danger-100);
+            border-color: var(--danger-200);
+        }
+
+        /* QR Code Preview */
+        .qr-preview {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: auto;
+            max-width: 60px;
+        }
+
+        .qr-preview img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: zoom-in;
+            border: 2px solid var(--border-color);
+        }
+
+        .qr-preview:hover img {
+            transform: scale(2.8);
+            box-shadow: var(--shadow-xl);
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+            70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 8px rgba(79, 70, 229, 0); }
+            100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
+
+        @keyframes slide-in-right {
+            0% { transform: translateX(50px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fade-in {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .pagination-info {
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 0.375rem;
+        }
+
+        .pagination-btn {
+            min-width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            padding: 0 0.5rem;
+        }
+
+        .pagination-btn:hover:not(.disabled):not(.active) {
+            background-color: var(--primary-50);
+            color: var(--primary-600);
+            border-color: var(--primary-200);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .pagination-btn.active {
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+            color: white;
+            border-color: var(--primary-700);
+            box-shadow: var(--shadow-md);
+        }
+
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Modal */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.7);
+            z-index: var(--z-modal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-backdrop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-backdrop.show .modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-tertiary);
+            font-size: 1.25rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            transition: var(--transition-base);
+        }
+
+        .modal-close:hover {
+            background-color: var(--neutral-100);
+            color: var(--danger-600);
+        }
+
+        [data-theme="dark"] .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.875rem;
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Delete Confirmation Modal */
+        .delete-confirmation {
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .delete-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-full);
+            background-color: var(--danger-50);
+            color: var(--danger-500);
+            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            border: 2px dashed var(--danger-200);
+            animation: pulse 2s infinite;
+        }
+
+        [data-theme="dark"] .delete-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--danger-400);
+        }
+
+        .delete-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .delete-message {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "header"
+                    "main";
+            }
+            
+            .dashboard-sidebar {
+                transform: translateX(-100%);
+                box-shadow: var(--shadow-lg);
+            }
+            
+            .dashboard-sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .dashboard-main {
+                padding: 1.5rem;
+            }
+            
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(2px);
+                z-index: calc(var(--z-sidebar) - 1);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition-base);
+            }
+            
+            .overlay.show {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .datetime-display {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-right {
+                display: none;
+            }
+            
+            .dashboard-header {
+                padding: 0 1rem;
+            }
+            
+            .card-body {
+                padding: 1.25rem;
+            }
+            
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+
+            .pagination {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .pagination-controls {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Dashboard Container -->
+    <div class="dashboard-container" id="dashboardContainer">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon"><i class="fas fa-qrcode"></i></span>
+                    <span class="logo-text">EventQR Pro</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-menu">
+                <div class="sidebar-menu-section">
+                    <div class="sidebar-section-title">General</div>
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-nav-item">
+                            <a href="#" class="sidebar-link active">
+                                <i class="fas fa-chart-line"></i>
+                                <span class="sidebar-link-text">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="#" class="sidebar-link">
+                                <i                                <i class="fas fa-users"></i>
+                                <span class="sidebar-link-text">Participantes</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="fas fa-user-check"></i>
+                                <span class="sidebar-link-text">Asistencias</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="fas fa-qrcode"></i>
+                                <span class="sidebar-link-text">Códigos QR</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-menu-section">
+                    <div class="sidebar-section-title">Administración</div>
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-nav-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="sidebar-link-text">Eventos</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="fas fa-bell"></i>
+                                <span class="sidebar-link-text">Notificaciones</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="fas fa-cog"></i>
+                                <span class="sidebar-link-text">Configuración</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="theme-switcher">
+                    <i class="fas fa-moon switch-icon"></i>
+                    <span class="sidebar-link-text">Modo Oscuro</span>
+                    <label class="switch">
+                        <input type="checkbox" id="themeSwitch">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="toggle-sidebar" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Panel de Control</h1>
+            </div>
+            
+            <div class="header-right">
+                <div class="header-actions">
+                    <button class="header-icon-btn" id="refreshButton" data-tooltip="Actualizar datos">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="header-icon-btn" data-tooltip="Exportar datos">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="header-icon-btn" data-tooltip="Notificaciones">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-indicator">3</span>
+                    </button>
+                </div>
+                
+                <div class="user-profile">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">PFfrank13</div>
+                        <div class="user-role">Administrador</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Flash Messages -->
+            <div class="alert-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                <i class="alert-icon fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-circle' }}"></i>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            
+            <!-- Date/Time Display -->
+            <div class="datetime-display">
+                <i class="fas fa-clock datetime-icon"></i>
+                <div class="datetime-info">
+                    <div class="datetime-label">Fecha y hora actual</div>
+                    <div class="datetime-value" id="currentDateTime">2025-04-09 17:46:41 UTC</div>
+                </div>
+            </div>
+            
+            <!-- Auto-refresh Progress Indicator -->
+            <div class="refresh-container">
+                <div class="refresh-info">
+                    <span class="pulse-dot"></span>
+                    <span>Los datos se actualizan automáticamente cada 30 segundos</span>
+                </div>
+                <div class="refresh-progress-container">
+                    <div class="refresh-progress-bar" id="refreshProgressBar"></div>
+                </div>
+            </div>
+            
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card stat-card--primary">
+                    <i class="fas fa-users stat-icon"></i>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalCount">{{ total_count }}</div>
+                        <div class="stat-label">Total Registrados</div>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" style="width:100%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card stat-card--success">
+                    <i class="fas fa-user-check stat-icon"></i>
+                    <div class="stat-content">
+                        <div class="stat-value" id="attendedCount">{{ attended_count }}</div>
+                        <div class="stat-label">Asistieron</div>
+                        <div class="stat-comparison stat-change-positive">
+                            <i class="fas fa-chart-line"></i>
+                            <span id="attendedPercentage">
+                                {% if total_count > 0 %}
+                                    {{ (attended_count / total_count * 100) | round(1) }}%
+                                {% else %}
+                                    0%
+                                {% endif %}
+                            </span>
+                            del total
+                        </div>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" style="width:{% if total_count > 0 %}{{ (attended_count / total_count * 100) }}{% else %}0{% endif %}%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card stat-card--warning">
+                    <i class="fas fa-user-clock stat-icon"></i>
+                    <div class="stat-content">
+                        <div class="stat-value" id="notAttendedCount">{{ not_attended_count }}</div>
+                        <div class="stat-label">Pendientes</div>
+                        <div class="stat-comparison">
+                            <i class="fas fa-chart-line"></i>
+                            <span id="pendingPercentage">
+                                {% if total_count > 0 %}
+                                    {{ (not_attended_count / total_count * 100) | round(1) }}%
+                                {% else %}
+                                    0%
+                                {% endif %}
+                            </span>
+                            del total
+                        </div>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" style="width:{% if total_count > 0 %}{{ (not_attended_count / total_count * 100) }}{% else %}0{% endif %}%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card stat-card--primary">
+                    <i class="fas fa-chart-pie stat-icon"></i>
+                    <div class="stat-content">
+                        <div class="stat-value" id="attendanceRate">
+                            {% if total_count > 0 %}
+                                {{ (attended_count / total_count * 100) | round(1) }}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        </div>
+                        <div class="stat-label">Tasa de Asistencia</div>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" style="width:{% if total_count > 0 %}{{ (attended_count / total_count * 100) }}{% else %}0{% endif %}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-line"></i>
+                            Distribución de Asistencia
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="attendanceChart" width="400" height="250"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #10b981;"></div>
+                                <span>Asistieron</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #f59e0b;"></div>
+                                <span>No Asistieron</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-pie"></i>
+                            Porcentaje de Asistencia
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="distributionChart" width="250" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Participants Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-users"></i>
+                        Participantes Registrados
+                    </h3>
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar participante...">
+                    </div>
+                </div>
+                <div class="card-body table-container">
+                    <table class="data-table" id="participantsTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Asistencia</th>
+                                <th>Código QR</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.lastname }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.phone }}</td>
+                                <td>
+                                    {% if user.attended %}
+                                    <span class="badge badge-success">
+                                        <i class="fas fa-check-circle"></i> Asistió
+                                    </span>
+                                    {% else %}
+                                    <span class="badge badge-warning">
+                                        <i class="fas fa-clock"></i> Pendiente
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="qr-preview">
+                                        <img src="{{ url_for('static', filename='qr_codes/' + user.qr_code.split('/')[-1]) }}" alt="QR Code">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="display:flex; gap:0.5rem;">
+                                        <button class="action-btn action-btn-view" title="Ver detalles" data-user-id="{{ user.id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn action-btn-delete" title="Eliminar" data-user-id="{{ user.id }}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <div class="pagination-info">Mostrando <b>{{ users|length }}</b> de <b>{{ total_count }}</b> participantes</div>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn disabled">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Delete All Button -->
+            <div style="display:flex; justify-content:center; margin-top:2rem;">
+                <button id="deleteAllBtn" class="btn btn-danger btn-lg">
+                    <i class="fas fa-trash-alt"></i>
+                    Eliminar Todos los Datos
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-backdrop" id="deleteConfirmModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirmar eliminación</h4>
+                <button class="modal-close" id="closeDeleteModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-confirmation">
+                    <div class="delete-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="delete-title">¿Estás seguro?</h3>
+                    <p class="delete-message">Esta acción eliminará permanentemente todos los registros de usuarios y asistencias. Esta acción no se puede deshacer.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="cancelDelete">Cancelar</button>
+                <a href="{{ url_for('delete_all') }}" class="btn btn-danger">Confirmar Eliminación</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- QR Detail Modal -->
+    <div class="modal-backdrop" id="qrDetailModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h4 class="modal-title">Código QR de Usuario</h4>
+                <button class="modal-close" id="closeQrModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="display:flex; flex-direction:column; align-items:center;">
+                    <img id="modalQrImage" src="" alt="QR Code" style="width:200px; height:auto; margin-bottom:1rem;">
+                    <h4 id="modalUserName"></h4>
+                    <p id="modalUserEmail"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="downloadQr">
+                    <i class="fas fa-download"></i>
+                    Descargar QR
+                </button>
+                <button class="btn btn-secondary" id="closeQrModalBtn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize variables
+            const attended = {{ attended_count }};
+            const notAttended = {{ not_attended_count }};
+            const total = {{ total_count }};
+            
+            // Theme toggle functionality
+            const themeSwitch = document.getElementById('themeSwitch');
+            const htmlElement = document.documentElement;
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            htmlElement.setAttribute('data-theme', savedTheme);
+            themeSwitch.checked = savedTheme === 'dark';
+            
+            // Theme switch event listener
+            themeSwitch.addEventListener('change', function() {
+                if (this.checked) {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    htmlElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // Sidebar toggle functionality
+            const toggleBtn = document.getElementById('toggleSidebar');
+            const dashboard = document.getElementById('dashboardContainer');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            toggleBtn.addEventListener('click', function() {
+                dashboard.classList.toggle('collapsed');
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('show');
+            });
+            
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+            });
+            
+            // Refresh progress bar animation
+            const refreshBar = document.getElementById('refreshProgressBar');
+            let width = 0;
+            const interval = 300; // 30 seconds = 30000ms, 30000/100 = 300ms per 1%
+            
+            function updateProgressBar() {
+                if (width >= 100) {
+                    width = 0;
+                    // Refresh data here
+                    // For demo purposes we'll just reset the bar
+                } else {
+                    width++;
+                    refreshBar.style.width = width + '%';
+                }
+            }
+            
+            setInterval(updateProgressBar, interval);
+            
+            // Format current date time
+            function updateDateTime() {
+                const now = new Date();
+                const options = { 
+                    year: 'numeric', 
+                    month: '2-digit', 
+                    day: '2-digit',
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    second: '2-digit',
+                    timeZone: 'UTC',
+                    timeZoneName: 'short'
+                };
+                document.getElementById('currentDateTime').textContent = now.toLocaleString('es-ES', options);
+            }
+            
+            updateDateTime();
+            setInterval(updateDateTime, 60000);
+            
+            // Initialize attendance chart
+            const ctx = document.getElementById('attendanceChart').getContext('2d');
+            const attendanceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Asistió', 'No Asistió'],
+                    datasets: [{
+                        label: 'Participantes',
+                        data: [attended, notAttended],
+                        backgroundColor: ['#10b981', '#f59e0b'],
+                        borderColor: ['#047857', '#b45309'],
+                        borderWidth: 1,
+                        borderRadius: 6,
+                        barThickness: 40
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.raw;
+                                    return label;
+                                },
+                                afterLabel: function(context) {
+                                    const percentage = Math.round((context.raw / total) * 100);
+                                    return `${percentage}% del total`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                display: true,
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Initialize distribution chart
+            const ctxPie = document.getElementById('distributionChart').getContext('2d');
+            const distributionChart = new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Asistió', 'No Asistió'],
+                    datasets: [{
+                        data: [attended, notAttended],
+                        backgroundColor: [
+                            '#10b981',
+                            '#f59e0b'
+                        ],
+                        borderColor: [
+                            '#047857',
+                            '#b45309'
+                        ],
+                        borderWidth: 1,
+                        hoverOffset: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const percentage = Math.round((tooltipItem.raw / total) * 100);
+                                    return `${tooltipItem.label}: ${tooltipItem.raw} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Initialize Data Table
+            if ($.fn.DataTable) {
+                $('#participantsTable').DataTable({
+                    responsive: true,
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                    },
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'csv',
+                            text: '<i class="fas fa-file-csv"></i> CSV',
+                            className: 'btn btn-sm btn-primary'
+                        },
+                        {
+                            extend: 'excel',
+                            text: '<i class="fas fa-file-excel"></i> Excel',
+                            className: 'btn btn-sm btn-primary'
+                        },
+                        {
+                            extend: 'pdf',
+                            text: '<i class="fas fa-file-pdf"></i> PDF',
+                            className: 'btn btn-sm btn-primary'
+                        }
+                    ]
+                });
+            }
+            
+            // Modal functionality
+            const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+            const closeDeleteModal = document.getElementById('closeDeleteModal');
+            const cancelDelete = document.getElementById('cancelDelete');
+            const deleteAllBtn = document.getElementById('deleteAllBtn');
+            
+            // QR Modal functionality
+            const qrDetailModal = document.getElementById('qrDetailModal');
+            const closeQrModal = document.getElementById('closeQrModal');
+            const closeQrModalBtn = document.getElementById('closeQrModalBtn');
+            const modalQrImage = document.getElementById('modalQrImage');
+            const modalUserName = document.getElementById('modalUserName');
+            const modalUserEmail = document.getElementById('modalUserEmail');
+            const viewButtons = document.querySelectorAll('.action-btn-view');
+            
+            deleteAllBtn.addEventListener('click', function() {
+                deleteConfirmModal.classList.add('show');
+            });
+            
+            closeDeleteModal.addEventListener('click', function() {
+                deleteConfirmModal.classList.remove('show');
+            });
+            
+            cancelDelete.addEventListener('click', function() {
+                deleteConfirmModal.classList.remove('show');
+            });
+            
+            // Alternative approach using SweetAlert2 for better UX
+            deleteAllBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: '¡Esta acción eliminará todos los datos y no se puede deshacer!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar todo',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#e11d48',
+                    cancelButtonColor: '#4f46e5',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "{{ url_for('delete_all') }}";
+                    }
+                });
+            });
+            
+            // View QR buttons
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const name = row.cells[0].textContent;
+                    const lastname = row.cells[1].textContent;
+                    const email = row.cells[2].textContent;
+                    const qrSrc = row.querySelector('.qr-preview img').getAttribute('src');
+                    
+                    modalQrImage.src = qrSrc;
+                    modalUserName.textContent = name + ' ' + lastname;
+                    modalUserEmail.textContent = email;
+                    
+                    qrDetailModal.classList.add('show');
+                });
+            });
+            
+            closeQrModal.addEventListener('click', function() {
+                qrDetailModal.classList.remove('show');
+            });
+            
+            closeQrModalBtn.addEventListener('click', function() {
+                qrDetailModal.classList.remove('show');
+            });
+            
+            // CountUp.js for animated counters
+            if (typeof CountUp !== 'undefined') {
+                const totalCountUp = new CountUp('totalCount', total, {
+                    duration: 2,
+                    separator: '.'
+                });
+                
+                const attendedCountUp = new CountUp('attendedCount', attended, {
+                    duration: 2.5,
+                    separator: '.'
+                });
+                
+                const notAttendedCountUp = new CountUp('notAttendedCount', notAttended, {
+                    duration: 3,
+                    separator: '.'
+                });
+                
+                // Calculate attendance rate
+                let rate = 0;
+                if (total > 0) {
+                    rate = (attended / total) * 100;
+                }
+                
+                const attendanceRateCountUp = new CountUp('attendanceRate', rate, {
+                    duration: 3.5,
+                    decimalPlaces: 1,
+                    suffix: '%'
+                });
+                
+                totalCountUp.start();
+                attendedCountUp.start();
+                notAttendedCountUp.start();
+                attendanceRateCountUp.start();
+            }
+            
+            // Refresh button functionality
+            const refreshButton = document.getElementById('refreshButton');
+            refreshButton.addEventListener('click', function() {
+                this.classList.add('fa-spin');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 600);
+            });
+            
+            // Download QR button
+            document.getElementById('downloadQr').addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.href = modalQrImage.src;
+                link.download = 'qr-code-' + modalUserName.textContent.trim().replace(/\s+/g, '-').toLowerCase() + '.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+    </script>
+</body>
+</html>

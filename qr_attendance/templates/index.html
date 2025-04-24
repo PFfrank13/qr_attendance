@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema ultra premium para registro de asistencia mediante códigos QR - Diamond Elite Edition">
+    <title>EventQR Diamond Elite | Registro Inteligente de Asistencia</title>
+    
+    <!-- Dynamic Favicon with diamond -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+    
+    <!-- Premium Font Collection -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Enhanced Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Premium Animation Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    
+    <!-- Advanced Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- GSAP Animation Suite -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
+    
+    <!-- Enhanced Three.js for 3D visuals -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    
+    <!-- Luxon for timezone management -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+    
+    <!-- AOS (Animate On Scroll) -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Todos los estilos CSS igual que antes -->
+    <style>
+        /* Diamond Ultra Premium Color System */
+        :root {
+            --diamond-blue-50: #eef6ff;
+            --diamond-blue-100: #dae9ff;
+            --diamond-blue-200: #bdd7ff;
+            --diamond-blue-300: #91bcff;
+            --diamond-blue-400: #5e96ff;
+            --diamond-blue-500: #3b75ff;
+            --diamond-blue-600: #1a53ff;
+            --diamond-blue-700: #1442ee;
+            --diamond-blue-800: #1339d1;
+            --diamond-blue-900: #1538a5;
+            
+            --diamond-emerald-50: #edfdf8;
+            --diamond-emerald-100: #d4f9eb;
+            --diamond-emerald-200: #a9f0d7;
+            --diamond-emerald-300: #73e2bd;
+            --diamond-emerald-400: #3fcba0;
+            --diamond-emerald-500: #1eb384;
+            --diamond-emerald-600: #10946f;
+            --diamond-emerald-700: #0f775d;
+            --diamond-emerald-800: #115e4d;
+            --diamond-emerald-900: #124d42;
+            
+            --diamond-gold-50: #fef9ec;
+            --diamond-gold-100: #fef2cc;
+            --diamond-gold-200: #fae58f;
+            --diamond-gold-300: #f8d34f;
+            --diamond-gold-400: #f4bc25;
+            --diamond-gold-500: #e3a011;
+            --diamond-gold-600: #c47d0a;
+            --diamond-gold-700: #9b5b0c;
+            --diamond-gold-800: #7e4911;
+            --diamond-gold-900: #693c12;
+            
+            --diamond-purple-50: #f7f5ff;
+            --diamond-purple-100: #eeecfe;
+            --diamond-purple-200: #ddd8fe;
+            --diamond-purple-300: #cbc0fd;
+            --diamond-purple-400: #ad98fc;
+            --diamond-purple-500: #9162f9;
+            --diamond-purple-600: #7f3bf2;
+            --diamond-purple-700: #6c2cd9;
+            --diamond-purple-800: #5522b5;
+            --diamond-purple-900: #471e95;
+            
+            --diamond-gray-50: #F9FAFC;
+            --diamond-gray-100: #F2F6F9;
+            --diamond-gray-200: #E3E9F0;
+            --diamond-gray-300: #CCD6E1;
+            --diamond-gray-400: #95A4B8;
+            --diamond-gray-500: #65758B;
+            --diamond-gray-600: #485569;
+            --diamond-gray-700: #334255;
+            --diamond-gray-800: #1F293B;
+            --diamond-gray-900: #10172A;
+            --diamond-gray-950: #030617;
+            
+            /* Ultra Premium Gradients */
+            --gradient-diamond: linear-gradient(135deg, #a9c9ff 0%, #4285f4 100%);
+            --gradient-royal: linear-gradient(135deg, #6366f1 0%, #7e22ce 100%);
+            --gradient-luxury: linear-gradient(135deg, #F9C58D 0%, #f3a857 100%);
+            --gradient-emerald: linear-gradient(135deg, #84fab0 0%, #38C8A3 100%);
+            --gradient-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-ultra: linear-gradient(135deg, #6e48aa 0%, #9d50bb 50%, #6e48aa 100%);
+            --gradient-crystal: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+            --gradient-dark-crystal: linear-gradient(135deg, rgba(31, 41, 55, 0.4) 0%, rgba(31, 41, 55, 0.1) 100%);
+            --gradient-peru-flag: linear-gradient(90deg, #cf142b 0%, #cf142b 33.33%, #ffffff 33.33%, #ffffff 66.66%, #cf142b 66.66%, #cf142b 100%);
+            
+            /* Light Theme (default) */
+            --body-bg: var(--diamond-gray-50);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg-solid: #fff;
+            --text-primary: var(--diamond-gray-900);
+            --text-secondary: var(--diamond-gray-700);
+            --text-muted: var(--diamond-gray-500);
+            --text-accent: var(--diamond-blue-700);
+            --divider: var(--diamond-gray-200);
+            --border-color: var(--diamond-gray-200);
+            
+            /* Glass Effect */
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-bg-strong: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-blur: blur(16px);
+            
+            /* Shadows & Effects */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            --shadow-diamond: 0 10px 30px -5px rgba(66, 133, 244, 0.5);
+            --shadow-royal: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+            --shadow-emerald: 0 10px 25px -5px rgba(56, 200, 163, 0.4);
+            --shadow-luxury: 0 10px 30px -5px rgba(246, 211, 101, 0.5);
+            
+            /* Neumorphism */
+            --neumorphism-flat: -3px -3px 6px rgba(255, 255, 255, 1), 
+                                3px 3px 6px rgba(0, 0, 0, 0.05);
+            --neumorphism-pressed: inset -2px -2px 5px rgba(255, 255, 255, 0.7), 
+                                   inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+            
+            /* Dark Theme */
+            --dark-body-bg: var(--diamond-gray-900);
+            --dark-card-bg: rgba(31, 41, 59, 0.85);
+            --dark-card-bg-solid: var(--diamond-gray-800);
+            --dark-text-primary: var(--diamond-gray-100);
+            --dark-text-secondary: var(--diamond-gray-300);
+            --dark-text-muted: var(--diamond-gray-400);
+            --dark-text-accent: var(--diamond-blue-300);
+            --dark-divider: var(--diamond-gray-700);
+            --dark-border-color: var(--diamond-gray-700);
+            --dark-glass-bg: rgba(15, 23, 42, 0.7);
+            --dark-glass-bg-strong: rgba(15, 23, 42, 0.85);
+            --dark-glass-border: rgba(255, 255, 255, 0.1);
+            --dark-neumorphism-flat: -2px -2px 5px rgba(31, 41, 55, 0.7), 
+                                     2px 2px 5px rgba(0, 0, 0, 0.2);
+            --dark-neumorphism-pressed: inset -2px -2px 5px rgba(31, 41, 55, 0.7), 
+                                        inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+            
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.25rem;
+            --radius-2xl: 1.5rem;
+            --radius-3xl: 2rem;
+            --radius-full: 9999px;
+            
+            /* Layout & Spacing */
+            --content-max-width: 1400px;
+            --header-height: 80px;
+            
+            /* Transitions */
+            --transition-base: all 0.2s ease;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-fancy: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        /* Dark Mode Theme */
+        [data-theme="dark"] {
+            --body-bg: var(--dark-body-bg);
+            --card-bg: var(--dark-card-bg);
+            --card-bg-solid: var(--dark-card-bg-solid);
+            --text-primary: var(--dark-text-primary);
+            --text-secondary: var(--dark-text-secondary);
+            --text-muted: var(--dark-text-muted);
+            --text-accent: var(--dark-text-accent);
+            --divider: var(--dark-divider);
+            --border-color: var(--dark-border-color);
+            --glass-bg: var(--dark-glass-bg);
+            --glass-bg-strong: var(--dark-glass-bg-strong);
+            --glass-border: var(--dark-glass-border);
+            --neumorphism-flat: var(--dark-neumorphism-flat);
+            --neumorphism-pressed: var(--dark-neumorphism-pressed);
+        }
+        
+        /* Base Styles */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            height: 100%;
+        }
+        
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+            position: relative;
+            height: 100%;
+        }
+        
+        /* Custom scrollbar - ultra premium style */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+            background: var(--card-bg-solid);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--diamond-blue-300);
+            border-radius: var(--radius-full);
+            border: 3px solid var(--card-bg-solid);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--diamond-blue-500);
+        }
+        
+        [data-theme="dark"] ::-webkit-scrollbar {
+            background: var(--dark-card-bg-solid);
+        }
+        
+        [data-theme="dark"] ::-webkit-scrollbar-thumb {
+            background: var(--diamond-blue-600);
+            border: 3px solid var(--dark-card-bg-solid);
+        }
+        
+        [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+            background: var(--diamond-blue-500);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+        
+        h5, .luxury-text {
+            font-family: 'Cormorant', serif;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--diamond-blue-600);
+            transition: var(--transition-base);
+        }
+        
+        a:hover {
+            color: var(--diamond-blue-700);
+        }
+        
+        button, a.btn {
+            font-family: inherit;
+            cursor: pointer;
+            user-select: none;
+            border: none;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-bounce);
+        }
+        
+        /* Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.15;
+            background-image: 
+                radial-gradient(var(--diamond-blue-100) 1px, transparent 1px),
+                radial-gradient(var(--diamond-blue-200) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            transition: var(--transition-base);
+        }
+        
+        [data-theme="dark"] .bg-pattern {
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(var(--diamond-blue-700) 1px, transparent 1px),
+                radial-gradient(var(--diamond-blue-600) 1px, transparent 1px);
+        }
+        
+        /* Particles Container */
+        .particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.7;
+        }
+        
+        /* 3D Objects Container */
+        .three-js-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        
+        /* Diamond Accent Elements */
+        .diamond-accent {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-diamond);
+            transform: rotate(45deg);
+            opacity: 0.8;
+            box-shadow: var(--shadow-diamond);
+            z-index: 1;
+        }
+        
+        .diamond-sm {
+            width: 10px;
+            height: 10px;
+        }
+        
+        .diamond-lg {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .diamond-1 {
+            top: 120px;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .diamond-2 {
+            top: 40%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite 1s;
+        }
+        
+        .diamond-3 {
+            bottom: 20%;
+            left: 5%;
+            animation: float 7s ease-in-out infinite 2s;
+        }
+        
+        .diamond-4 {
+            bottom: 10%;
+            right: 10%;
+            animation: float 9s ease-in-out infinite 3s;
+        }
+        
+        /* Layout Styles */
+        .app-container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0 1.5rem;
+            position: relative;
+            z-index: 50;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-emblem {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-lg);
+            background: var(--gradient-diamond);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-diamond);
+            animation: pulse-subtle 3s infinite ease-in-out;
+        }
+        
+        .logo-emblem::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+            transition: 0.75s;
+        }
+        
+        .logo-container:hover .logo-emblem::before {
+            transform: translateX(100%);
+        }
+        
+        .logo-emblem:after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            background: rgba(255,255,255,0.15);
+            border-radius: inherit;
+            transform: rotate(45deg) translate(-50%, -10%);
+        }
+        
+        .brand-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.875rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: var(--gradient-diamond);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .brand-edition {
+            display: block;
+            font-family: 'Cormorant', serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: -5px;
+            color: var(--diamond-gold-600);
+            position: relative;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* User Info Section */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+        
+        .datetime {
+            position: relative;
+            padding: 0.75rem 1.25rem;
+            background: var(--glass-bg-strong);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition-smooth);
+        }
+        
+        .datetime:before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--gradient-diamond);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.6;
+            transition: var(--transition-base);
+        }
+        
+        .datetime:hover:before {
+            opacity: 1;
+        }
+        
+        .date-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.075em;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        
+        .date-value {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .date-value:before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--diamond-emerald-500);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1.25rem 0.5rem 0.5rem;
+            background: var(--glass-bg-strong);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .user-profile:before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px; 
+            background: var(--gradient-royal);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .user-profile:hover {
+            box-shadow: var(--shadow-royal);
+            transform: translateY(-2px);
+        }
+        
+        .user-profile:hover:before {
+            opacity: 1;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background: var(--gradient-royal);
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            position: relative;
+            box-shadow: 0 3px 10px -3px rgba(99, 102, 241, 0.5);
+        }
+        
+        .avatar:after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--diamond-emerald-500);
+            border: 2px solid white;
+            border-radius: 50%;
+            bottom: -2px;
+            right: -2px;
+        }
+        
+        .user-info-content {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        
+        .user-role {
+            font-size: 0.75rem;
+            color: var(--diamond-blue-600);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        [data-theme="dark"] .user-role {
+            color: var(--diamond-blue-400);
+        }
+        
+        /* Theme Toggle Button */
+        .toggle-theme {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-full);
+            background-color: var(--glass-bg-strong);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .toggle-theme:before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--gradient-ultra);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: var(--transition-base);
+        }
+        
+        .toggle-theme:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background: currentColor;
+            opacity: 0.1;
+            transform: scale(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .toggle-theme:hover {
+            transform: rotate(20deg) scale(1.05);
+            color: var(--diamond-blue-600);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .toggle-theme:hover:before {
+            opacity: 1;
+        }
+        
+        .toggle-theme:active:after {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+        
+        [data-theme="dark"] .toggle-theme:hover {
+            color: var(--diamond-blue-300);
+        }
+        
+        .ripple {
+            animation: ripple 0.7s linear;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            padding: 1rem 0 2.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .welcome-label {
+            font-family: 'Cormorant', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: inline-block;
+            position: relative;
+            padding: 0 2rem;
+        }
+        
+        .welcome-label:before, .welcome-label:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: var(--diamond-gold-400);
+            transition: var(--transition-base);
+        }
+        
+        .welcome-label:before {
+            left: -20px;
+        }
+        
+        .welcome-label:after {
+            right: -20px;
+        }
+        
+        .welcome-heading {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .welcome-heading-gradient {
+            background: var(--gradient-diamond);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .welcome-heading:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 3px;
+            background: var(--gradient-diamond);
+            border-radius: var(--radius-full);
+            transition: var(--transition-base);
+        }
+        
+        .welcome-subheading {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        /* Main Card */
+        .main-card {
+            background: var(--card-bg-solid);
+            border-radius: var(--radius-2xl);
+            padding: 4rem;
+            position: relative;
+            z-index: 30;
+            overflow: hidden;
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition-smooth);
+        }
+        
+        .main-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: var(--gradient-diamond);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        .card-glow {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: var(--diamond-blue-50);
+            top: -350px;
+            right: -350px;
+            opacity: 0.4;
+            z-index: -1;
+            filter: blur(100px);
+            transition: var(--transition-smooth);
+            pointer-events: none;
+        }
+        
+        [data-theme="dark"] .card-glow {
+            background: var(--diamond-blue-900);
+            opacity: 0.15;
+        }
+        
+        .entry-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .option-card {
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius-xl);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            box-shadow: var(--neumorphism-flat);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .option-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.75s;
+            z-index: 1;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .option-card:active {
+            box-shadow: var(--neumorphism-pressed);
+            transform: translateY(0);
+        }
+        
+        .option-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .option-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+            position: relative;
+            transition: var(--transition-bounce);
+            margin-bottom: 1.5rem;
+            z-index: 5;
+        }
+        
+        .option-card:hover .option-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        
+        .option-icon-participant {
+            background: var(--gradient-emerald);
+            color: white;
+            box-shadow: var(--shadow-emerald);
+        }
+        
+        .option-icon-admin {
+            background: var(--gradient-diamond);
+            color: white;
+            box-shadow: var(--shadow-diamond);
+        }
+        
+        .option-icon-login {
+            background: var(--gradient-luxury);
+            color: white;
+            box-shadow: var(--shadow-luxury);
+        }
+        
+        .option-content {
+            z-index: 5;
+            width: 100%;
+        }
+        
+        .option-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .option-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+        }
+        
+        .option-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-accent);
+            font-weight: 500;
+        }
+        
+        .option-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-diamond);
+            color: white;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1.75rem;
+            box-shadow: var(--shadow-diamond);
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+            width: auto;
+        }
+        
+        .option-card:nth-child(1) .option-button {
+            background: var(--gradient-emerald);
+            box-shadow: var(--shadow-emerald);
+        }
+        
+        .option-card:nth-child(2) .option-button {
+            background: var(--gradient-diamond);
+            box-shadow: var(--shadow-diamond);
+        }
+        
+        .option-card:nth-child(3) .option-button {
+            background: var(--gradient-luxury);
+            box-shadow: var(--shadow-luxury);
+        }
+        
+        .option-button:before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+        
+        .option-card:hover .option-button:before {
+            transform: translateX(100%);
+        }
+        
+        .option-card:hover .option-button {
+            transform: translateY(5px);
+        }
+        
+        .option-card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--diamond-blue-100);
+            color: var(--diamond-blue-700);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 10;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        [data-theme="dark"] .option-card-badge {
+            background: rgba(79, 70, 229, 0.2);
+            color: var(--diamond-blue-300);
+        }
+        
+        /* Lima Time Clock Section */
+        .lima-clock-container {
+            background: var(--glass-bg-strong);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 4rem auto 2rem;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-smooth);
+        }
+        
+        .lima-clock-container:before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--gradient-peru-flag);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.8;
+            transition: var(--transition-base);
+        }
+        
+        .lima-clock-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .lima-clock-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .lima-clock-title i {
+            color: #cf142b; /* Peru flag red */
+            font-size: 1.5rem;
+        }
+        
+        .lima-time {
+            background: var(--card-bg-solid);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lima-time:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .lima-time::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-peru-flag);
+            transition: var(--transition-base);
+        }
+        
+        .lima-timezone-name {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
+        }
+        
+        .lima-timezone-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 0.05em;
+        }
+        
+        .lima-timezone-date {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .lima-details {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+        
+        .peru-flag-icon {
+            width: 2.5rem;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 4rem 0 3rem;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            margin-bottom: 1rem;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-title-gradient {
+            background: var(--gradient-diamond);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: var(--card-bg-solid);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--gradient-diamond);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+        
+        .feature-card:nth-child(2)::before {
+            background: var(--gradient-emerald);
+        }
+        
+        .feature-card:nth-child(3)::before {
+            background: var(--gradient-royal);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon-wrapper {
+            width: 90px;
+            height: 90px;
+            border-radius: var(--radius-lg);
+            background-color: var(--diamond-blue-50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            font-size: 2.5rem;
+            color: var(--diamond-blue-600);
+            box-shadow: 0 5px 20px -10px rgba(26, 83, 255, 0.5);
+            position: relative;
+            transition: var(--transition-bounce);
+        }
+        
+        [data-theme="dark"] .feature-icon-wrapper {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--diamond-blue-300);
+        }
+        
+        .feature-card:hover .feature-icon-wrapper {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        
+        .feature-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .feature-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-diamond);
+            border-radius: var(--radius-full);
+        }
+        
+        .feature-card:nth-child(2) .feature-title::after {
+            background: var(--gradient-emerald);
+        }
+        
+        .feature-card:nth-child(3) .feature-title::after {
+            background: var(--gradient-royal);
+        }
+        
+        .feature-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--diamond-blue-600);
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+        
+        [data-theme="dark"] .feature-more {
+            color: var(--diamond-blue-300);
+        }
+        
+        .feature-more:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-diamond);
+            transition: var(--transition-smooth);
+        }
+        
+        .feature-more:hover:after {
+            width: 100%;
+        }
+        
+        .feature-more i {
+            font-size: 0.75rem;
+            transition: var(--transition-smooth);
+        }
+        
+        .feature-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Footer */
+        .app-footer {
+            margin-top: auto;
+            padding: 3rem 0 2rem;
+            position: relative;
+            z-index: 30;
+            text-align: center;
+        }
+        
+        .footer-content {
+            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .footer-content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--gradient-crystal);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        
+        [data-theme="dark"] .footer-content::before {
+            background: var(--gradient-dark-crystal);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            transition: var(--transition-base);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .footer-link:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-diamond);
+            transition: var(--transition-smooth);
+        }
+        
+        .footer-link:hover {
+            color: var(--diamond-blue-600);
+        }
+        
+        .footer-link:hover:after {
+            width: 100%;
+        }
+        
+        [data-theme="dark"] .footer-link:hover {
+            color: var(--diamond-blue-300);
+        }
+        
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(45deg); }
+            50% { transform: translateY(-15px) rotate(45deg); }
+            100% { transform: translateY(0px) rotate(45deg); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.6; }
+        }
+        
+        @keyframes pulse-subtle {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes shine {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        @keyframes ripple {
+            0% { box-shadow: 0 0 0 0 rgba(59, 117, 255, 0.4); }
+            100% { box-shadow: 0 0 0 20px rgba(59, 117, 255, 0); }
+        }
+        
+        /* Particle effects */
+        .particle-container {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+        
+        .particle-container.fade-out {
+            opacity: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--diamond-blue-300);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: particle-float 3s ease-in-out infinite;
+        }
+        
+        [data-theme="dark"] .particle {
+            background: var(--diamond-blue-500);
+        }
+        
+        @keyframes particle-float {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+        
+        /* Time digits animation */
+        .time-digit {
+            display: inline-block;
+            position: relative;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .app-container {
+                padding: 1.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 991px) {
+            .main-card {
+                padding: 3rem 2rem;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .feature-icon-wrapper {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .entry-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .lima-timezone-time {
+                font-size: 2.5rem;
+            }
+            
+            .lima-clock-container {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .welcome-heading {
+                font-size: 2rem;
+            }
+            
+            .welcome-subheading {
+                font-size: 1rem;
+            }
+            
+            .logo-emblem {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+            
+            .brand-text {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .feature-title {
+                font-size: 1.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .main-card {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Diamond Accent Elements -->
+    <div class="diamond-accent diamond-1 diamond-sm"></div>
+    <div class="diamond-accent diamond-2"></div>
+    <div class="diamond-accent diamond-3 diamond-lg"></div>
+    <div class="diamond-accent diamond-4 diamond-sm"></div>
+    
+    <!-- Background Pattern -->
+    <div class="bg-pattern"></div>
+    
+    <!-- Particles.js Container -->
+    <div id="particles-js" class="particles-js"></div>
+    
+    <!-- Three.js Container -->
+    <div id="three-js-container" class="three-js-container"></div>
+    
+    <div class="app-container">
+        <header class="page-header">
+            <div class="logo-container">
+                <div class="logo-emblem">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <div>
+                    <h1 class="brand-text">EventQR</h1>
+                    <span class="brand-edition">Diamond Elite</span>
+                </div>
+            </div>
+            
+            <div class="user-info">
+                <div class="datetime">
+                    <div class="date-label">Fecha y hora actual (UTC)</div>
+                    <div class="date-value" id="currentDateTime">2025-04-11 02:37:55</div>
+                </div>
+                
+                <div class="user-profile">
+                    <div class="avatar">PF</div>
+                    <div class="user-info-content">
+                        <div class="user-name">PFfrank13</div>
+                        <div class="user-role">Diamond Elite</div>
+                    </div>
+                    <i class="fas fa-chevron-down" style="font-size: 0.75rem; color: var(--text-muted); margin-left: 10px;"></i>
+                </div>
+                
+                <button class="toggle-theme" id="themeToggle" aria-label="Cambiar modo oscuro/claro">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+        
+        <section class="hero-section">
+            <span class="welcome-label">Experiencia ultra premium</span>
+            <h1 class="welcome-heading">
+                <span class="welcome-heading-gradient">Registro Inteligente</span><br>
+                de Asistencia Elite
+            </h1>
+            <p class="welcome-subheading">Sistema premium con tecnología QR avanzada para el registro, seguimiento y análisis avanzado de asistencia para eventos profesionales exclusivos.</p>
+        </section>
+        
+        <div class="main-card">
+            <div class="card-glow"></div>
+            
+            <div class="entry-options">
+                <a href="/register_user" class="option-card">
+                    <span class="option-card-badge">Recomendado</span>
+                    <div class="option-icon option-icon-participant">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="option-content">
+                        <h3 class="option-title">Registro de Participante</h3>
+                        <p class="option-description">Regístrate como asistente para obtener tu código QR personalizado de acceso al evento.</p>
+                        <div class="option-meta">
+                            <i class="fas fa-clock"></i>
+                            <span>Proceso rápido - menos de 1 minuto</span>
+                        </div>
+                        <button class="option-button">
+                            Registrarse ahora
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </a>
+                
+                <a href="/register_root" class="option-card">
+                    <div class="option-icon option-icon-admin">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+<div class="option-content">
+                        <h3 class="option-title">Registro de Administrador</h3>
+                        <p class="option-description">Crea una cuenta de administrador para gestionar eventos, participantes y estadísticas avanzadas.</p>
+                        <div class="option-meta">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Control total del sistema</span>
+                        </div>
+                        <button class="option-button">
+                            Crear cuenta
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </a>
+                
+                <a href="/login_root" class="option-card">
+                    <div class="option-icon option-icon-login">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <div class="option-content">
+                        <h3 class="option-title">Acceso Administrador</h3>
+                        <p class="option-description">Inicia sesión con tu cuenta de administrador para gestionar tu panel de control.</p>
+                        <div class="option-meta">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Panel de control avanzado</span>
+                        </div>
+                        <button class="option-button">
+                            Iniciar sesión
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="lima-clock-container" data-aos="fade-up">
+            <div class="lima-clock-title">
+                <i class="fas fa-globe-americas"></i>
+                <span>Hora Mundial - Lima, Perú</span>
+            </div>
+            <div class="lima-time">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCI+PHBhdGggZmlsbD0iI2NmMTQyYiIgZD0iTTAgMGg0MDB2ODAwSDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTQwMCAwaHQwMHY4MDBINDAweiIvPjxwYXRoIGZpbGw9IiNjZjE0MmIiIGQ9Ik04MDAgMGg0MDB2ODAwSDgwMHoiLz48L3N2Zz4=" alt="Bandera de Perú" class="peru-flag-icon">
+                <div class="lima-timezone-name">Lima (Perú)</div>
+                <div class="lima-timezone-time" id="time-Lima">21:44:28</div>
+                <div class="lima-timezone-date" id="date-Lima">2025-04-10</div>
+                <div class="lima-details">UTC-5:00</div>
+            </div>
+        </div>
+        
+        <section class="features-section">
+            <h2 class="section-title">Características <span class="section-title-gradient">Diamond Elite</span></h2>
+            
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h3 class="feature-title">Registro QR Ultra Seguro</h3>
+                    <p class="feature-description">Códigos QR encriptados con tecnología militar que se actualizan dinámicamente cada 60 segundos para una seguridad sin precedentes.</p>
+                    <a href="#" class="feature-more">Descubrir tecnología <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Analítica Predictiva</h3>
+                    <p class="feature-description">Inteligencia artificial que anticipa patrones de asistencia y genera informes personalizados con visualizaciones interactivas en tiempo real.</p>
+                    <a href="#" class="feature-more">Explorar capacidades <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Seguridad Diamond</h3>
+                    <p class="feature-description">Protección de nivel empresarial con certificación ISO 27001, respaldo automático en la nube y autenticación multifactor biométrica.</p>
+                    <a href="#" class="feature-more">Revisar protocolos <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="app-footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Términos de Servicio</a>
+                    <a href="#" class="footer-link">Política de Privacidad</a>
+                    <a href="#" class="footer-link">Soporte Premium</a>
+                    <a href="#" class="footer-link">Contacto Exclusivo</a>
+                </div>
+                <p class="copyright">© 2025 EventQR Diamond Elite. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS (Animate on Scroll)
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out',
+                once: true,
+                offset: 100
+            });
+            
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Check saved preference or system preference
+            const currentTheme = localStorage.getItem('theme') || 
+                               (prefersDarkScheme.matches ? 'dark' : 'light');
+            
+            // Apply saved theme or default
+            document.body.setAttribute('data-theme', currentTheme);
+            updateThemeIcon(currentTheme);
+            
+            // Theme toggle button event
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                // Add ripple effect animation
+                themeToggle.classList.add('ripple');
+                setTimeout(() => themeToggle.classList.remove('ripple'), 700);
+                
+                document.body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+                
+                // Update particles color
+                if (window.pJSDom && window.pJSDom[0]) {
+                    updateParticlesColor(newTheme);
+                }
+            });
+            
+            function updateThemeIcon(theme) {
+                themeToggle.innerHTML = theme === 'dark' 
+                    ? '<i class="fas fa-sun"></i>' 
+                    : '<i class="fas fa-moon"></i>';
+            }
+            
+            // Initialize particles
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 50,
+                        density: { enable: true, value_area: 800 }
+                    },
+                    color: {
+                        value: document.body.getAttribute('data-theme') === 'dark' ? '#4338ca' : '#818cf8'
+                    },
+                    shape: {
+                        type: 'circle',
+                        stroke: { width: 0, color: '#000000' }
+                    },
+                    opacity: {
+                        value: 0.3,
+                        random: true,
+                        anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: { enable: true, speed: 1, size_min: 0.1, sync: false }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: document.body.getAttribute('data-theme') === 'dark' ? '#4338ca' : '#818cf8',
+                        opacity: 0.2,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1,
+                        direction: 'none',
+                        random: true,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: { enable: true, mode: 'grab' },
+                        onclick: { enable: true, mode: 'push' }
+                    }
+                }
+            });
+            
+            // Apply particle effects to cards
+            const cards = document.querySelectorAll('.option-card, .feature-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', createParticles);
+                card.addEventListener('mouseleave', removeParticles);
+            });
+            
+            function createParticles() {
+                const container = document.createElement('div');
+                container.className = 'particle-container';
+                this.appendChild(container);
+                
+                for (let i = 0; i < 15; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    particle.style.animationDelay = `${Math.random() * 2}s`;
+                    container.appendChild(particle);
+                }
+            }
+            
+            function removeParticles() {
+                const container = this.querySelector('.particle-container');
+                if (container) {
+                    container.classList.add('fade-out');
+                    setTimeout(() => container.remove(), 1000);
+                }
+            }
+            
+            // Animate Lima time digits
+            const timeElement = document.getElementById('time-Lima');
+            const timeDigits = timeElement.textContent.split('');
+            timeElement.innerHTML = '';
+            
+            timeDigits.forEach(digit => {
+                const span = document.createElement('span');
+                span.className = 'time-digit';
+                span.textContent = digit;
+                timeElement.appendChild(span);
+            });
+            
+            // Regular clock update
+            setInterval(() => {
+                const now = new Date('2025-04-11T02:44:28Z'); // Use provided UTC time
+                now.setSeconds(now.getSeconds() + 1); // Increment by 1 second each interval
+                
+                // Calculate Lima time (UTC-5)
+                const limaTime = new Date(now.getTime());
+                limaTime.setHours(limaTime.getHours() - 5);
+                
+                // Format time
+                const hours = String(limaTime.getUTCHours()).padStart(2, '0');
+                const minutes = String(limaTime.getUTCMinutes()).padStart(2, '0');
+                const seconds = String(limaTime.getUTCSeconds()).padStart(2, '0');
+                
+                // Update UTC time
+                document.getElementById('currentDateTime').textContent = 
+                    `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, '0')}-${String(now.getUTCDate()).padStart(2, '0')} ${String(now.getUTCHours()).padStart(2, '0')}:${String(now.getUTCMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}`;
+                
+                // Update Lima time with animated digits
+                const newTimeDigits = `${hours}:${minutes}:${seconds}`.split('');
+                const timeDigitElements = document.querySelectorAll('.time-digit');
+                
+                newTimeDigits.forEach((digit, index) => {
+                    if (index < timeDigitElements.length) {
+                        timeDigitElements[index].textContent = digit;
+                    }
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
